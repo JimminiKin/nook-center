@@ -1,6 +1,6 @@
 {
-  "name": "with-apollo",
-  "version": "2.0.0",
+  "name": "nook-center",
+  "version": "0.0.1",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -34,5 +34,13 @@
     "autoprefixer": "^9.7.6",
     "postcss-import": "^12.0.1",
     "typescript": "^3.8.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimminiKin/nook-center.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JimminiKin/nook-center/issues"
+  },
+  "homepage": "https://github.com/JimminiKin/nook-center#readme"
 }
