@@ -19,17 +19,6 @@ const VillagerIndex: NextPage = (props) => {
   const [starSign, setStarSign] = React.useState<string>("");
   const [searchText, setSearchText] = React.useState<string>("");
 
-  console.log(
-    {
-      gender,
-      personality,
-      species,
-      starSign,
-      text: searchText,
-    },
-    StarSign
-  );
-
   const { loading, error, data, refetch } = useVillagersSearchQuery({
     variables: {
       search: {
@@ -55,7 +44,7 @@ const VillagerIndex: NextPage = (props) => {
         <input
           type="text"
           className="block p-2 px-3 rounded-lg"
-          value={searchText}
+          value={searchText || ""}
           onChange={(event) => setSearchText(event.target.value)}
           placeholder="Text Search"
         />
@@ -79,13 +68,11 @@ const VillagerIndex: NextPage = (props) => {
           onChange={(event) => setSpecies(event.target.value || "")}
         >
           <option value="">Species</option>
-          {Object.keys(Species).map((key) => {
-            return (
-              <option key={key} value={key}>
-                {Species[key]}
-              </option>
-            );
-          })}
+          {Object.keys(Species).map((key) => (
+            <option key={key} value={key}>
+              {Species[key]}
+            </option>
+          ))}
         </select>
         <select
           value={starSign || ""}
@@ -93,13 +80,11 @@ const VillagerIndex: NextPage = (props) => {
           onChange={(event) => setStarSign(event.target.value || "")}
         >
           <option value="">Star Sign</option>
-          {Object.keys(StarSign).map((key) => {
-            return (
-              <option key={key} value={key}>
-                {StarSign[key]}
-              </option>
-            );
-          })}
+          {Object.keys(StarSign).map((key) => (
+            <option key={key} value={key}>
+              {StarSign[key]}
+            </option>
+          ))}
         </select>
         <select
           value={personality || ""}
@@ -107,13 +92,11 @@ const VillagerIndex: NextPage = (props) => {
           onChange={(event) => setPersonality(event.target.value || "")}
         >
           <option value="">Personality</option>
-          {Object.keys(Personality).map((key) => {
-            return (
-              <option key={key} value={key}>
-                {Personality[key]}
-              </option>
-            );
-          })}
+          {Object.keys(Personality).map((key) => (
+            <option key={key} value={key}>
+              {Personality[key]}
+            </option>
+          ))}
         </select>
         <button
           className="block bg-green-900 text-gray-100 p-2 px-3 rounded-lg"
@@ -122,6 +105,7 @@ const VillagerIndex: NextPage = (props) => {
             setPersonality(undefined);
             setSpecies(undefined);
             setStarSign(undefined);
+            setSearchText(undefined);
           }}
         >
           Reset
