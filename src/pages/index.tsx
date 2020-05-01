@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 
 const Index = () => {
   return (
-    <div className="p-10">
+    <div className="p-10 text-center">
       <h1 className="text-green-900 font-bold text-5xl">
         Welcome to Nook Center
       </h1>
