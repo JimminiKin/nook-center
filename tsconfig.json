@@ -15,9 +15,11 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@modules/*": ["modules/*"],
-      "@components/*": ["components/*"],
-      "@gen/*": ["__generated__/*"]
+      "@apollo/*": ["src/apollo/*"],
+      "@data/*": ["data/*"],
+      "@components/*": ["src/components/*"],
+      "@gen/*": ["src/generated/*"],
+      "@query/*": ["src/operation/query/*"]
     }
   },
   "exclude": ["node_modules"],

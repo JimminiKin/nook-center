@@ -1,0 +1,190 @@
+input VillagerSearchInput {
+  text: String
+  personality: Personality
+  species: Species
+  gender: Gender
+  starSign: StarSign
+}
+
+input IslandSearchInput {
+  treesBadSpecial: Boolean
+  treesGoodSpecial: Boolean
+  flowersBadSpecial: Boolean
+  flowersGoodSpecial: Boolean
+  rocksBadSpecial: Boolean
+  rocksGoodSpecial: Boolean
+  insectsBadSpecial: Boolean
+  insectsGoodSpecial: Boolean
+  fishesBadSpecial: Boolean
+  fishesGoodSpecial: Boolean
+}
+
+input NewVillagerProbaInput {
+  currentVillagers: [ID!]!
+  pastVillagers: [ID!]!
+  pastCampers: [ID!]!
+}
+
+type VillagerProbaOutput {
+  villager: Villager!
+  probability: Float!
+}
+
+type Query {
+  villager(villagerId: ID!): Villager
+  villagers(search: VillagerSearchInput!): [Villager!]!
+  island(islandId: ID!): Island
+  islands(search: IslandSearchInput!): [Island!]!
+  newVillagerProba(input: NewVillagerProbaInput!): [VillagerProbaOutput!]!
+}
+
+enum RelationshipQuality {
+  LIKE
+  NEUTRAL
+  DISLIKE
+}
+
+enum Personality {
+  CRANKY
+  JOCK
+  LAZY
+  NORMAL
+  PEPPY
+  SISTERLY
+  SMUG
+  SNOOTY
+}
+
+enum Species {
+  ALLIGATOR
+  ANTEATER
+  BEAR
+  BIRD
+  BULL
+  CAT
+  CHICKEN
+  COW
+  CUB
+  DEER
+  DOG
+  DUCK
+  EAGLE
+  ELEPHANT
+  FROG
+  GOAT
+  GORILLA
+  HAMSTER
+  HIPPO
+  KANGAROO
+  KOALA
+  LION
+  MONKEY
+  MOUSE
+  OCTOPUS
+  OSTRICH
+  PENGUIN
+  RABBIT
+  RHINO
+  SHEEP
+  PIG
+  SQUIRREL
+  WOLF
+  HORSE
+  TIGER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum StarSign {
+  AQUARIUS
+  PISCES
+  ARIES
+  TAURUS
+  GEMINI
+  CANCER
+  VIRGO
+  LIBRA
+  SCORPIO
+  SAGITTARIUS
+  CAPRICORN
+  LEO
+}
+
+type Picture {
+  small: String!
+  big: String!
+}
+
+type Villager {
+  id: ID!
+  name: String!
+  frName: String!
+  # translation: Translations
+  gender: Gender!
+  picture: Picture
+  nookiPediaPage: String!
+  species: Species!
+  personality: Personality!
+  relationShips: [Personality!]!
+  starSign: StarSign!
+  birthday: String!
+  description: String!
+  saying: String!
+  randomIslandSpawnProbability: Float!
+  congeners: [Villager]!
+  getsAlong: [Villager]!
+}
+
+type Island {
+  id: ID!
+  name: String!
+  picture: String!
+  maxOneDailyVisit: Boolean!
+  probability: Float!
+  requirements: String
+  description: String!
+  trees: String!
+  treesBadSpecial: Boolean!
+  treesGoodSpecial: Boolean!
+  flowers: String!
+  flowersBadSpecial: Boolean!
+  flowersGoodSpecial: Boolean!
+  rocks: String!
+  rocksBadSpecial: Boolean!
+  rocksGoodSpecial: Boolean!
+  insects: String!
+  insectsBadSpecial: Boolean!
+  insectsGoodSpecial: Boolean!
+  fishes: String!
+  fishesBadSpecial: Boolean!
+  fishesGoodSpecial: Boolean!
+}
+
+# type Critter {
+#     name: Translatable!
+# }
+
+# type Fish {
+#     name: Translatable!
+# }
+
+# type Fossils {
+#     name: Translatable!
+
+# }
+
+# type Material {
+#     name: Translatable!
+# }
+
+# type DIYMaterialConnection {
+
+# }
+
+# type DIY {
+#     name: Translatable!
+#     materials: []
+# }

@@ -1,0 +1,19 @@
+query villagersSearch($search: VillagerSearchInput!) {
+  villagers(search: $search) {
+    id
+    name
+    frName
+    gender
+    picture {
+      small
+      big
+    }
+    nookiPediaPage
+    species
+    personality
+    starSign
+    description
+    saying
+    randomIslandSpawnProbability
+  }
+}
