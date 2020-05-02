@@ -60,7 +60,7 @@
                   "name": "String",
                   "ofType": null
                 },
-                "defaultValue": null
+                "defaultValue": "null"
               },
               {
                 "name": "search",
@@ -70,7 +70,7 @@
                   "name": "VillagerSearchInput",
                   "ofType": null
                 },
-                "defaultValue": null
+                "defaultValue": "null"
               }
             ],
             "type": {
@@ -395,6 +395,26 @@
               "kind": "SCALAR",
               "name": "Float",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "getsAlong",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Villager",
+                  "ofType": null
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

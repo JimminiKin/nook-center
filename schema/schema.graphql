@@ -2,8 +2,8 @@ type Query {
   villager(villagerId: ID!): Villager
   villagers(
     start: Int = 20
-    after: String
-    search: VillagerSearchInput
+    after: String = null
+    search: VillagerSearchInput = null
   ): VillagersResultConnection!
   island(islandId: ID!): Island
   islands(search: IslandSearchInput!): [Island!]!
@@ -79,8 +79,7 @@ type Villager implements Node {
   saying: String!
   randomIslandSpawnProbability: Float!
   campsiteProbability(villageState: VillageStateInput): Float
-  # congeners: [Villager]!
-  # getsAlong: [Villager]!
+  getsAlong: [Villager]!
 }
 
 type Island {

@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@modules/*": ["src/modules/*"],
       "@apollo/*": ["src/apollo/*"],
       "@data/*": ["data/*"],
       "@components/*": ["src/components/*"],

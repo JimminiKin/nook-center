@@ -187,6 +187,7 @@ export type Villager = Node & {
   saying: Scalars['String'];
   randomIslandSpawnProbability: Scalars['Float'];
   campsiteProbability?: Maybe<Scalars['Float']>;
+  getsAlong: Array<Maybe<Villager>>;
 };
 
 

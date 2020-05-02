@@ -1,15 +1,17 @@
-import { Node } from "./Common";
+import { Resolvers } from "@gen/server/graphql";
 
-import {
-  VillagerBaseLoader,
-  getAllIds,
-  getOne,
-} from "@apollo/loaders/VillagerBaseLoader";
+import { createConnectionFromFullNodeEdgeList } from "@apollo/resolvers/Common";
+import { Species, Personality } from "@gen/common/graphql";
 
 import data from "@data/villagers.json";
 
-import { Species, Personality } from "@gen/common/graphql";
-import { VillagerCampsiteProbabilityArgs } from "@gen/server/graphql";
+const getAllIds = () => {
+  return data.map((villager) => villager.id);
+};
+
+const getOne = (key: string) => {
+  return data.find((elm) => elm.id === key);
+};
 
 import {
   getStarSign,
@@ -18,222 +20,226 @@ import {
   getSpecies,
 } from "@apollo/resolvers/utils";
 
-export class VillagerResolver implements Node {
-  readonly id: string;
+const VillagerResolver: Resolvers<any> = {
+  Query: {
+    villager(_, { villagerId }) {
+      return { id: villagerId, __typename: "Villager" };
+    },
+    villagers(_, { search, start, after }) {
+      const ids = getAllIds();
 
-  constructor(id: string) {
-    this.id = id;
-  }
+      const results = ids
+        .map(getOne)
+        .filter((villager) => {
+          let keep = true;
 
-  async name() {
-    try {
-      return getOne(this.id).name;
-    } catch (e) {
-      return null;
-    }
-  }
+          if (!search) {
+            return true;
+          }
 
-  async frName() {
-    try {
-      return getOne(this.id).translations.french;
-    } catch (e) {
-      return null;
-    }
-  }
+          if (search.text) {
+            if (
+              villager.name.toUpperCase().includes(search.text.toUpperCase()) ||
+              villager.translations.french
+                .toUpperCase()
+                .includes(search.text.toUpperCase())
+            ) {
+              keep = keep && true;
+            } else {
+              return false;
+            }
+          }
 
-  async gender() {
-    try {
-      const gender = getGender(getOne(this.id).gender);
+          if (search.gender) {
+            if (search.gender === getGender(villager.gender)) {
+              keep = keep && true;
+            } else {
+              return false;
+            }
+          }
+
+          if (search.personality) {
+            if (search.personality === getPersonality(villager.personality)) {
+              keep = keep && true;
+            } else {
+              return false;
+            }
+          }
+
+          if (search.species) {
+            if (search.species === getSpecies(villager.species)) {
+              keep = keep && true;
+            } else {
+              return false;
+            }
+          }
+
+          if (search.starSign) {
+            if (search.starSign === getStarSign(villager.starsign)) {
+              keep = keep && true;
+            } else {
+              return false;
+            }
+          }
+          return keep;
+        })
+        .map((res) => ({
+          id: res.id,
+        }));
+
+      return createConnectionFromFullNodeEdgeList(results, start, after);
+    },
+  },
+  Villager: {
+    name(parent) {
+      return getOne(parent.id).name;
+    },
+
+    frName(parent) {
+      return getOne(parent.id).translations.french;
+    },
+
+    gender(parent) {
+      const gender = getGender(getOne(parent.id).gender);
       if (gender === null) {
         throw new Error("Invalid Or Missing Villager Gender");
       }
       return gender;
-    } catch (e) {
-      return null;
-    }
-  }
+    },
 
-  async personality() {
-    try {
-      const personality = getPersonality(getOne(this.id).personality);
+    personality(parent) {
+      const personality = getPersonality(getOne(parent.id).personality);
       if (personality === null) {
         throw new Error("Invalid Or Missing Villager Personality");
       }
       return personality;
-    } catch (e) {
-      return null;
-    }
-  }
+    },
 
-  async species() {
-    try {
-      const species = getSpecies(getOne(this.id).species);
+    species(parent) {
+      const species = getSpecies(getOne(parent.id).species);
       if (species === null) {
         throw new Error("Invalid Or Missing Villager Species");
       }
       return species;
-    } catch (e) {
-      return null;
-    }
-  }
+    },
 
-  async starSign() {
-    try {
-      const starSign = getStarSign(getOne(this.id).starsign);
+    starSign(parent) {
+      const starSign = getStarSign(getOne(parent.id).starsign);
       if (starSign === null) {
         throw new Error("Invalid Or Missing Villager Star Sign");
       }
       return starSign;
-    } catch (e) {
-      return null;
-    }
-  }
+    },
 
-  async saying() {
-    try {
-      return getOne(this.id).saying;
-    } catch (e) {
-      return null;
-    }
-  }
+    saying(parent) {
+      return getOne(parent.id).saying;
+    },
 
-  async description() {
-    try {
-      return getOne(this.id).description;
-    } catch (e) {
-      return null;
-    }
-  }
+    description(parent) {
+      return getOne(parent.id).description;
+    },
 
-  async birthday() {
-    try {
-      return getOne(this.id).birthday;
-    } catch (e) {
-      return null;
-    }
-  }
+    birthday(parent) {
+      return getOne(parent.id).birthday;
+    },
 
-  async nookiPediaPage() {
-    try {
-      return getOne(this.id).nookiPediaPage;
-    } catch (e) {
-      return null;
-    }
-  }
+    nookiPediaPage(parent) {
+      return getOne(parent.id).nookiPediaPage;
+    },
 
-  async picture() {
-    try {
-      const src = getOne(this.id);
-      return src.image;
-    } catch (e) {
-      return null;
-    }
-  }
+    picture(parent) {
+      return getOne(parent.id).image;
+    },
 
-  async randomIslandSpawnProbability(): Promise<number> {
-    const allVillagers = getAllIds();
-    let sameSpeciesCount = 0;
+    randomIslandSpawnProbability(parent) {
+      const allVillagers = getAllIds();
+      let sameSpeciesCount = 0;
 
-    for (let i = 0; i < allVillagers.length; i++) {
-      const villagerId = allVillagers[i];
-      if (
-        (await new VillagerResolver(villagerId).species()) ===
-        (await this.species())
-      ) {
-        sameSpeciesCount++;
+      for (let i = 0; i < allVillagers.length; i++) {
+        const villagerId = allVillagers[i];
+        if (getOne(villagerId).species === getOne(parent.id).species) {
+          sameSpeciesCount++;
+        }
       }
-    }
 
-    return ((1 / Object.keys(Species).length) * 1) / sameSpeciesCount;
-  }
+      return ((1 / Object.keys(Species).length) * 1) / sameSpeciesCount;
+    },
 
-  async campsiteProbability(params: VillagerCampsiteProbabilityArgs) {
-    if (!params.villageState) {
-      return null;
-    }
+    campsiteProbability(parent, args) {
+      if (!args.villageState) {
+        return null;
+      }
 
-    const {
-      currentVillagers,
-      pastCampers,
-      pastVillagers,
-    } = params.villageState;
+      const {
+        currentVillagers,
+        pastCampers,
+        pastVillagers,
+      } = args.villageState;
 
-    const currentVillagersPersonalityCount: Record<Personality, number> = {
-      [Personality.Cranky]: 0,
-      [Personality.Jock]: 0,
-      [Personality.Lazy]: 0,
-      [Personality.Normal]: 0,
-      [Personality.Peppy]: 0,
-      [Personality.Sisterly]: 0,
-      [Personality.Smug]: 0,
-      [Personality.Snooty]: 0,
-    };
+      const currentVillagersPersonalityCount: Record<Personality, number> = {
+        [Personality.Cranky]: 0,
+        [Personality.Jock]: 0,
+        [Personality.Lazy]: 0,
+        [Personality.Normal]: 0,
+        [Personality.Peppy]: 0,
+        [Personality.Sisterly]: 0,
+        [Personality.Smug]: 0,
+        [Personality.Snooty]: 0,
+      };
 
-    const filteredVillagersPersonalityCount: Record<Personality, number> = {
-      [Personality.Cranky]: 0,
-      [Personality.Jock]: 0,
-      [Personality.Lazy]: 0,
-      [Personality.Normal]: 0,
-      [Personality.Peppy]: 0,
-      [Personality.Sisterly]: 0,
-      [Personality.Smug]: 0,
-      [Personality.Snooty]: 0,
-    };
+      const filteredVillagersPersonalityCount: Record<Personality, number> = {
+        [Personality.Cranky]: 0,
+        [Personality.Jock]: 0,
+        [Personality.Lazy]: 0,
+        [Personality.Normal]: 0,
+        [Personality.Peppy]: 0,
+        [Personality.Sisterly]: 0,
+        [Personality.Smug]: 0,
+        [Personality.Snooty]: 0,
+      };
 
-    for (let i = 0; i < currentVillagers.length; i++) {
-      const villagerId = currentVillagers[i];
-      currentVillagersPersonalityCount[
-        await new VillagerResolver(villagerId).personality()
-      ]++;
-    }
-
-    const allVillagers = getAllIds();
-
-    for (let i = 0; i < allVillagers.length; i++) {
-      const villagerId = allVillagers[i];
-      if (
-        !currentVillagers.includes(villagerId) &&
-        !pastVillagers.includes(villagerId) &&
-        !pastCampers.includes(villagerId)
-      ) {
-        filteredVillagersPersonalityCount[
-          await new VillagerResolver(villagerId).personality()
+      for (let i = 0; i < currentVillagers.length; i++) {
+        const villagerId = currentVillagers[i];
+        currentVillagersPersonalityCount[
+          getPersonality(getOne(villagerId).personality)
         ]++;
       }
-    }
 
-    if (
-      currentVillagers.includes(this.id) ||
-      pastVillagers.includes(this.id) ||
-      pastCampers.includes(this.id)
-    ) {
-      return 0;
-    }
+      const allVillagers = getAllIds();
 
-    const personnality = await this.personality();
-    if (currentVillagersPersonalityCount[personnality] === 0) {
-      return 0.6 * (1 / filteredVillagersPersonalityCount[personnality]);
-    }
+      for (let i = 0; i < allVillagers.length; i++) {
+        const villagerId = allVillagers[i];
+        if (
+          !currentVillagers.includes(villagerId) &&
+          !pastVillagers.includes(villagerId) &&
+          !pastCampers.includes(villagerId)
+        ) {
+          filteredVillagersPersonalityCount[
+            getPersonality(getOne(villagerId).personality)
+          ]++;
+        }
+      }
 
-    return (
-      0.4 *
-      (1 / (Object.keys(Personality).length - 1)) *
-      (1 / filteredVillagersPersonalityCount[personnality])
-    );
-  }
+      if (
+        currentVillagers.includes(parent.id) ||
+        pastVillagers.includes(parent.id) ||
+        pastCampers.includes(parent.id)
+      ) {
+        return 0;
+      }
 
-  // async congeners(parent) {
-  //   // return cleanData.filter((elm) => elm && parent.species === elm.species);
-  // }
-  // async getsAlong(parent) {
-  //   // return cleanData.filter((elm) => {
-  //   //   if (parent.personality === undefined || elm.personality === undefined) {
-  //   //     throw new Error("bisous");
-  //   //   }
-  //   //   return (
-  //   //     relationShips(parent.personality)[elm.personality] ===
-  //   //     RelationshipQuality.Like
-  //   //   );
-  //   // });
-  // }
-}
+      const personnality = getPersonality(getOne(parent.id).personality);
+      if (currentVillagersPersonalityCount[personnality] === 0) {
+        return 0.6 * (1 / filteredVillagersPersonalityCount[personnality]);
+      }
+
+      return (
+        0.4 *
+        (1 / (Object.keys(Personality).length - 1)) *
+        (1 / filteredVillagersPersonalityCount[personnality])
+      );
+    },
+  },
+};
+
+export default VillagerResolver;

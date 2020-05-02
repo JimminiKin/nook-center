@@ -4,11 +4,18 @@ import { NextPage } from "next";
 import Link from "next/link";
 import InfiniteScroller from "react-infinite-scroller";
 
+import Zodiac from "@components/Villager/Zodiac";
+import GenderPersonality from "@components/Villager/GenderPersonality";
+
 import { withApollo } from "@apollo/client";
+
+import { ucfirst } from "@modules/utils";
+
 import {
   useVillagersSearchQuery,
   VillagersSearchQuery,
 } from "@query/villagersSearch";
+
 import { Gender, Personality, StarSign, Species } from "@gen/common/graphql";
 
 const VillagerIndex: NextPage = (props) => {
@@ -20,7 +27,7 @@ const VillagerIndex: NextPage = (props) => {
 
   const { loading, error, data, fetchMore } = useVillagersSearchQuery({
     variables: {
-      start: 400,
+      start: 30,
       search: {
         gender: Gender[gender] || undefined,
         personality: Personality[personality] || undefined,
@@ -41,7 +48,7 @@ const VillagerIndex: NextPage = (props) => {
           "Dizzy",
           "Tom",
         ],
-        pastVillagers: ["Reneigh", "Louie", "Huck", "Chadder", "Alli"],
+        pastVillagers: ["Reneigh", "Louie", "Huck", "Chadder", "Alli", "Lyman"],
         pastCampers: [
           "Tank",
           "Olaf",
@@ -53,7 +60,6 @@ const VillagerIndex: NextPage = (props) => {
           "Leopold",
           "Lopez",
           "Shep",
-          "Lyman",
         ],
       },
     },
@@ -211,19 +217,35 @@ const VillagerCard: React.FC<{
       <div className="w-2/3 pl-4">
         <h4>{villager.name}</h4>
         <p>{villager.frName}</p>
-        <p>{villager.gender}</p>
-        <p>{villager.personality}</p>
-        <p>{villager.species}</p>
-        <p>{villager.starSign}</p>
-        <p>{(villager.randomIslandSpawnProbability * 100).toFixed(2)}%</p>
         <p>
-          {villager.campsiteProbability
-            ? `${(villager.campsiteProbability * 100).toFixed(2)}%`
-            : "N/A"}
+          <GenderPersonality
+            gender={villager.gender}
+            personality={villager.personality}
+          />
         </p>
-        <a href={villager.nookiPediaPage} target="_blank">
+        <p>{ucfirst(villager.species)}</p>
+        <p>
+          <Zodiac zodiac={villager.starSign} />
+        </p>
+        <p>
+          <span className="whitespace-no-wrap mr-1">
+            <span className="mr-1">🏝</span>
+            <span className="text-sm">
+              {(villager.randomIslandSpawnProbability * 100).toFixed(2)}%
+            </span>
+          </span>
+          <span className="whitespace-no-wrap">
+            <span className="mr-1">⛺</span>
+            <span className="text-sm">
+              {villager.campsiteProbability
+                ? `${(villager.campsiteProbability * 100).toFixed(2)}%`
+                : "N/A"}
+            </span>
+          </span>
+        </p>
+        {/* <a href={villager.nookiPediaPage} target="_blank">
           Nookiepedia
-        </a>
+        </a> */}
       </div>
     </li>
   );

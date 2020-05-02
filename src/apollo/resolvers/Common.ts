@@ -94,3 +94,11 @@ export function createConnectionFromFullNodeEdgeList<TEntity extends Node>(
     pageInfo: pageInfo,
   };
 }
+
+export default {
+  Node: {
+    __resolveType(item: any) {
+      return item.__typename;
+    },
+  },
+};
