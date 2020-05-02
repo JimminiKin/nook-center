@@ -37,7 +37,7 @@ const Header: React.FC = () => {
           isMenuOpen ? "block" : "hidden"
         }`}
       >
-        <HeaderLink target="/villager" name="Villagers" onClick={closeMenu} />
+        <HeaderLink target="/villagers" name="Villagers" onClick={closeMenu} />
         <HeaderLink target="/island" name="Islands" onClick={closeMenu} />
       </nav>
     </header>
