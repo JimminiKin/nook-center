@@ -36,7 +36,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
     WithApollo.displayName = `withApollo(${displayName})`;
   }
 
-  if (ssr || PageComponent.getInitialProps) {
+  if (ssr || PageComponent.getStaticProps) {
     WithApollo.getInitialProps = async (ctx) => {
       const { AppTree } = ctx;
 
@@ -121,7 +121,7 @@ function initApolloClient(initialState = {}) {
  * Creates and configures the ApolloClient
  * @param  {Object} [initialState={}]
  */
-function createApolloClient(initialState = {}) {
+export function createApolloClient(initialState = {}) {
   const ssrMode = typeof window === "undefined";
   const cache = new InMemoryCache().restore(initialState);
 

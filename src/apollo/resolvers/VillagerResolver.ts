@@ -140,7 +140,26 @@ const VillagerResolver: Resolvers<any> = {
     },
 
     birthday(parent) {
-      return getOne(parent.id).birthday;
+      const baseBirthDay = getOne(parent.id).birthday;
+      const dateObj = new Date(
+        Date.UTC(1970, baseBirthDay.month, baseBirthDay.day)
+      );
+
+      const value = dateObj.toLocaleString("en-US", {
+        timeZone: "UTC",
+        month: "short",
+        day: "numeric",
+      });
+
+      let dateletter = "";
+
+      if (baseBirthDay.day > 3 && baseBirthDay.day < 21) dateletter = "th";
+      else if (baseBirthDay.day % 10 === 1) dateletter = "st";
+      else if (baseBirthDay.day % 10 === 2) dateletter = "nd";
+      else if (baseBirthDay.day % 10 === 3) dateletter = "rd";
+      else dateletter = "th";
+
+      return value + dateletter;
     },
 
     nookiPediaPage(parent) {

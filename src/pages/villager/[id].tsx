@@ -1,12 +1,38 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { withApollo } from "@apollo/client";
+import { withApollo, createApolloClient } from "@apollo/client";
 
-import { useVillagerQuery, VillagerQuery } from "@query/villager";
+import {
+  useVillagerQuery,
+  VillagerQuery,
+  VillagerDocument,
+} from "@query/villager";
 
 import { Gender, Personality, StarSign, Species } from "@gen/common/graphql";
 import { NextPage } from "next";
+
+export const getStaticPaths = async () => {
+  const data = require("@data/villagers.json");
+
+  return {
+    paths: data.map((villager) => `/villager/${villager.id}`),
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
+  const apolloClient = createApolloClient();
+  await apolloClient.query({
+    query: VillagerDocument,
+    variables: { villagerId: params.id },
+  });
+  return {
+    props: {
+      apolloState: apolloClient.cache.extract(),
+    },
+  };
+};
 
 const Villager: NextPage = () => {
   const router = useRouter();
@@ -37,4 +63,4 @@ const Villager: NextPage = () => {
   );
 };
 
-export default withApollo(Villager);
+export default withApollo(Villager, { ssr: false });

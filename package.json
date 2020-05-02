@@ -5,12 +5,14 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "analyze": "cross-env ANALYZE=true npm run build"
   },
   "dependencies": {
     "@apollo/react-common": "3.0.1",
     "@apollo/react-hooks": "3.0.1",
     "@apollo/react-ssr": "3.0.1",
+    "@next/bundle-analyzer": "^9.3.6",
     "apollo-cache-inmemory": "1.6.3",
     "apollo-client": "2.6.4",
     "apollo-link-http": "1.5.15",
@@ -53,6 +55,7 @@
     "@types/react-infinite-scroller": "^1.2.1",
     "apollo": "^2.27.3",
     "autoprefixer": "^9.7.6",
+    "cross-env": "^7.0.2",
     "graphql-import-node": "0.0.4",
     "postcss-import": "^12.0.1",
     "typescript": "^3.8.3",

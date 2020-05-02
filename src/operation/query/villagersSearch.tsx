@@ -21,7 +21,7 @@ export type VillagersSearchQuery = (
       & Pick<Types.VillagersResultEdge, 'cursor'>
       & { node: (
         { __typename: 'Villager' }
-        & Pick<Types.Villager, 'id' | 'name' | 'frName' | 'gender' | 'nookiPediaPage' | 'species' | 'personality' | 'starSign' | 'description' | 'saying' | 'randomIslandSpawnProbability' | 'campsiteProbability'>
+        & Pick<Types.Villager, 'id' | 'name' | 'frName' | 'gender' | 'nookiPediaPage' | 'species' | 'personality' | 'starSign' | 'description' | 'saying' | 'birthday' | 'randomIslandSpawnProbability' | 'campsiteProbability'>
         & { picture?: Types.Maybe<(
           { __typename: 'Picture' }
           & Pick<Types.Picture, 'thumb' | 'medium' | 'full'>
@@ -57,6 +57,7 @@ export const VillagersSearchDocument = gql`
         starSign
         description
         saying
+        birthday
         randomIslandSpawnProbability
         campsiteProbability(villageState: $villageState)
       }

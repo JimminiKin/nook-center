@@ -4,12 +4,9 @@ import { NextPage } from "next";
 import Link from "next/link";
 import InfiniteScroller from "react-infinite-scroller";
 
-import Zodiac from "@components/Villager/Zodiac";
-import GenderPersonality from "@components/Villager/GenderPersonality";
-
 import { withApollo } from "@apollo/client";
 
-import { ucfirst } from "@modules/utils";
+import { ucfirst, getGenderEmoji, getZodiacEmoji } from "@modules/utils";
 
 import {
   useVillagersSearchQuery,
@@ -17,6 +14,7 @@ import {
 } from "@query/villagersSearch";
 
 import { Gender, Personality, StarSign, Species } from "@gen/common/graphql";
+import { VillageStateInput } from "@gen/server/graphql";
 
 const VillagerIndex: NextPage = (props) => {
   const [gender, setGender] = React.useState<string>("");
@@ -24,6 +22,38 @@ const VillagerIndex: NextPage = (props) => {
   const [species, setSpecies] = React.useState<string>("");
   const [starSign, setStarSign] = React.useState<string>("");
   const [searchText, setSearchText] = React.useState<string>("");
+
+  let villageState: VillageStateInput = {
+    currentVillagers: [
+      "Filbert",
+      "Snooty",
+      "Octavian",
+      "Maddie",
+      "Phoebe",
+      "Flora",
+      "Peck",
+      "Fauna",
+      "Dizzy",
+      "Tom",
+    ],
+    pastVillagers: ["Reneigh", "Louie", "Huck", "Chadder", "Alli", "Lyman"],
+    pastCampers: [
+      "Tank",
+      "Olaf",
+      "Frank",
+      "Ken",
+      "Bubbles",
+      "Cally",
+      "Lionel",
+      "Leopold",
+      "Lopez",
+      "Shep",
+      "Klaus",
+      "Chops",
+      "Clay",
+      "Iggly",
+    ],
+  };
 
   const { loading, error, data, fetchMore } = useVillagersSearchQuery({
     variables: {
@@ -35,33 +65,7 @@ const VillagerIndex: NextPage = (props) => {
         starSign: StarSign[starSign] || undefined,
         text: searchText || undefined,
       },
-      villageState: {
-        currentVillagers: [
-          "Filbert",
-          "Snooty",
-          "Octavian",
-          "Maddie",
-          "Phoebe",
-          "Flora",
-          "Peck",
-          "Fauna",
-          "Dizzy",
-          "Tom",
-        ],
-        pastVillagers: ["Reneigh", "Louie", "Huck", "Chadder", "Alli", "Lyman"],
-        pastCampers: [
-          "Tank",
-          "Olaf",
-          "Frank",
-          "Ken",
-          "Bubbles",
-          "Cally",
-          "Lionel",
-          "Leopold",
-          "Lopez",
-          "Shep",
-        ],
-      },
+      villageState,
     },
   });
 
@@ -73,66 +77,66 @@ const VillagerIndex: NextPage = (props) => {
       <Head>
         <title>My page title</title>
       </Head>
-      <div className="p-4 md:flex md:justify-evenly">
+      <div className="p-4 lg:flex lg:justify-evenly">
         <input
           type="text"
-          className="block p-2 px-3 rounded-lg"
+          className="inline-block p-2 px-3 rounded-lg m-4"
           value={searchText || ""}
           onChange={(event) => setSearchText(event.target.value)}
           placeholder="Text Search"
         />
         <select
           value={gender || ""}
-          className="p-2"
+          className="inline-block p-2 m-4"
           onChange={(event) => setGender(event.target.value)}
         >
           <option value="">Gender</option>
           {Object.keys(Gender).map((key) => {
             return (
               <option key={key} value={key}>
-                {Gender[key]}
+                {ucfirst(Gender[key])}
               </option>
             );
           })}
         </select>
         <select
           value={species || ""}
-          className="p-2"
+          className="inline-block p-2 m-4"
           onChange={(event) => setSpecies(event.target.value || "")}
         >
           <option value="">Species</option>
           {Object.keys(Species).map((key) => (
             <option key={key} value={key}>
-              {Species[key]}
+              {ucfirst(Species[key])}
             </option>
           ))}
         </select>
         <select
           value={starSign || ""}
-          className="p-2"
+          className="inline-block p-2 m-4"
           onChange={(event) => setStarSign(event.target.value || "")}
         >
           <option value="">Star Sign</option>
           {Object.keys(StarSign).map((key) => (
             <option key={key} value={key}>
-              {StarSign[key]}
+              {ucfirst(StarSign[key])}
             </option>
           ))}
         </select>
         <select
           value={personality || ""}
-          className="p-2"
+          className="inline-block p-2 m-4"
           onChange={(event) => setPersonality(event.target.value || "")}
         >
           <option value="">Personality</option>
           {Object.keys(Personality).map((key) => (
             <option key={key} value={key}>
-              {Personality[key]}
+              {ucfirst(Personality[key])}
             </option>
           ))}
         </select>
         <button
-          className="block bg-green-900 text-gray-100 p-2 px-3 rounded-lg"
+          className="inline-block bg-green-900 text-gray-100 p-2 px-3 rounded-lg m-4"
           onClick={() => {
             setGender(undefined);
             setPersonality(undefined);
@@ -145,9 +149,9 @@ const VillagerIndex: NextPage = (props) => {
         </button>
       </div>
       {loading ? (
-        <div className="items-center flex justify-around p-56">
-          <h4>Loading ...</h4>
-        </div>
+        <main className="items-center flex justify-around p-56">
+          <h4>Loading Page ...</h4>
+        </main>
       ) : (
         <InfiniteScroller
           element="ul"
@@ -178,7 +182,7 @@ const VillagerIndex: NextPage = (props) => {
           }}
           loader={
             <div key="loader" className="items-center flex justify-center p-20">
-              <h4>Loading ...</h4>
+              <h4>Loading More ...</h4>
             </div>
           }
         >
@@ -203,7 +207,7 @@ const VillagerCard: React.FC<{
   return (
     <li className="bg-white rounded-lg overflow-hidden border-gray-600 items-center flex justify-between p-4">
       <Link href="/villager/[id]" as={`/villager/${villager.id}`}>
-        <div className="w-1/3 max-h-full">
+        <div className="w-1/3 max-h-full cursor-pointer">
           <a>
             <img
               loading="lazy"
@@ -215,37 +219,57 @@ const VillagerCard: React.FC<{
         </div>
       </Link>
       <div className="w-2/3 pl-4">
-        <h4>{villager.name}</h4>
-        <p>{villager.frName}</p>
+        <Link href="/villager/[id]" as={`/villager/${villager.id}`}>
+          <h4 className="text-lg text-green-900 font-semibold cursor-pointer">
+            {villager.name}
+          </h4>
+        </Link>
         <p>
-          <GenderPersonality
-            gender={villager.gender}
-            personality={villager.personality}
-          />
-        </p>
-        <p>{ucfirst(villager.species)}</p>
-        <p>
-          <Zodiac zodiac={villager.starSign} />
-        </p>
-        <p>
-          <span className="whitespace-no-wrap mr-1">
-            <span className="mr-1">🏝</span>
-            <span className="text-sm">
-              {(villager.randomIslandSpawnProbability * 100).toFixed(2)}%
-            </span>
-          </span>
-          <span className="whitespace-no-wrap">
-            <span className="mr-1">⛺</span>
-            <span className="text-sm">
-              {villager.campsiteProbability
-                ? `${(villager.campsiteProbability * 100).toFixed(2)}%`
-                : "N/A"}
+          {ucfirst(villager.species)} |{" "}
+          <span className="tooltip">
+            {getGenderEmoji(villager.gender)}
+            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+              {ucfirst(villager.gender)}
             </span>
           </span>
         </p>
-        {/* <a href={villager.nookiPediaPage} target="_blank">
-          Nookiepedia
-        </a> */}
+        <p>{ucfirst(villager.personality)}</p>
+        <p>
+          <span className="tooltip">
+            {getZodiacEmoji(villager.starSign)}
+            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+              {ucfirst(villager.starSign)}
+            </span>
+          </span>
+          <span className="ml-1 text-sm">{ucfirst(villager.birthday)}</span>
+        </p>
+        <p>
+          <span className="tooltip">
+            <span className="whitespace-no-wrap mr-1">
+              <span className="mr-1">🏝</span>
+              <span className="text-sm">
+                {(villager.randomIslandSpawnProbability * 100).toFixed(2)}%
+              </span>
+            </span>
+            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+              <span>Probability of spawn on random island</span>
+            </span>
+          </span>
+
+          <span className="tooltip">
+            <span className="whitespace-no-wrap">
+              <span className="mr-1">⛺</span>
+              <span className="text-sm">
+                {villager.campsiteProbability
+                  ? `${(villager.campsiteProbability * 100).toFixed(2)}%`
+                  : "N/A"}
+              </span>
+            </span>
+            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+              <span>Probability of spawn in campsite</span>
+            </span>
+          </span>
+        </p>
       </div>
     </li>
   );

@@ -25,6 +25,7 @@ query villagersSearch(
         starSign
         description
         saying
+        birthday
         randomIslandSpawnProbability
         campsiteProbability(villageState: $villageState)
       }
