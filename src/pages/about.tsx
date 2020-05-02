@@ -15,3 +15,5 @@ const About: NextPage = () => {
     </p>
   );
 };
+
+export default About;
