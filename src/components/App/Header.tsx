@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         <div>
           <Link href="/">
             <a onClick={closeMenu}>
-              <img className="h-10" src="/favicon-96x96.png" alt="Logo" />
+              <img className="h-10" src="/icon/favicon-96x96.png" alt="Logo" />
             </a>
           </Link>
         </div>

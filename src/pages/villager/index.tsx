@@ -2,14 +2,13 @@ import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
 import Link from "next/link";
+import InfiniteScroller from "react-infinite-scroller";
 
 import { withApollo } from "@apollo/client";
-
 import {
   useVillagersSearchQuery,
   VillagersSearchQuery,
 } from "@query/villagersSearch";
-
 import { Gender, Personality, StarSign, Species } from "@gen/common/graphql";
 
 const VillagerIndex: NextPage = (props) => {
@@ -19,8 +18,9 @@ const VillagerIndex: NextPage = (props) => {
   const [starSign, setStarSign] = React.useState<string>("");
   const [searchText, setSearchText] = React.useState<string>("");
 
-  const { loading, error, data, refetch } = useVillagersSearchQuery({
+  const { loading, error, data, fetchMore } = useVillagersSearchQuery({
     variables: {
+      start: 400,
       search: {
         gender: Gender[gender] || undefined,
         personality: Personality[personality] || undefined,
@@ -28,13 +28,40 @@ const VillagerIndex: NextPage = (props) => {
         starSign: StarSign[starSign] || undefined,
         text: searchText || undefined,
       },
+      villageState: {
+        currentVillagers: [
+          "Filbert",
+          "Snooty",
+          "Octavian",
+          "Maddie",
+          "Phoebe",
+          "Flora",
+          "Peck",
+          "Fauna",
+          "Dizzy",
+          "Tom",
+        ],
+        pastVillagers: ["Reneigh", "Louie", "Huck", "Chadder", "Alli"],
+        pastCampers: [
+          "Tank",
+          "Olaf",
+          "Frank",
+          "Ken",
+          "Bubbles",
+          "Cally",
+          "Lionel",
+          "Leopold",
+          "Lopez",
+          "Shep",
+          "Lyman",
+        ],
+      },
     },
   });
 
   if (error) {
-    throw new Error("Error searching for villagers");
+    throw new Error("Error searching for villagers " + error);
   }
-
   return (
     <>
       <Head>
@@ -116,51 +143,89 @@ const VillagerIndex: NextPage = (props) => {
           <h4>Loading ...</h4>
         </div>
       ) : (
-        <ResultGrid villagers={data.villagers} />
+        <InfiniteScroller
+          element="ul"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4"
+          hasMore={
+            data && data.villagers ? data.villagers.pageInfo.hasNextPage : false
+          }
+          loadMore={() => {
+            fetchMore({
+              variables: {
+                after: data.villagers.pageInfo.endCursor,
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                return {
+                  villagers: {
+                    edges: [
+                      ...prev.villagers.edges,
+                      ...fetchMoreResult.villagers.edges,
+                    ],
+                    pageInfo: fetchMoreResult.villagers.pageInfo,
+                    __typename: prev.villagers.__typename,
+                  },
+                  __typename: prev.__typename,
+                };
+              },
+            });
+          }}
+          loader={
+            <div key="loader" className="items-center flex justify-center p-20">
+              <h4>Loading ...</h4>
+            </div>
+          }
+        >
+          {data.villagers.edges.map((edge) => {
+            const { node: villager } = edge;
+            return (
+              <VillagerCard
+                key={villager.id}
+                villager={villager}
+              ></VillagerCard>
+            );
+          })}
+        </InfiniteScroller>
       )}
     </>
   );
 };
 
-const ResultGrid: React.FC<{
-  villagers: VillagersSearchQuery["villagers"];
-}> = ({ villagers }) => {
+const VillagerCard: React.FC<{
+  villager: VillagersSearchQuery["villagers"]["edges"][0]["node"];
+}> = ({ villager }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4">
-      {villagers.map((villager) => {
-        return (
-          <div
-            key={villager.id}
-            className="bg-white rounded-lg overflow-hidden border-gray-600 items-center flex justify-between p-4"
-          >
-            <Link href="/villager/[id]" as={`/villager/${villager.id}`}>
-              <div className="w-1/3 max-h-full">
-                <a>
-                  <img
-                    loading="lazy"
-                    className="block h-full w-full"
-                    src={villager.picture.big}
-                    alt={`Picture of ${villager.name}`}
-                  />
-                </a>
-              </div>
-            </Link>
-            <div className="w-2/3 pl-4">
-              <h4>{villager.name}</h4>
-              <p>{villager.frName}</p>
-              <p>{villager.gender}</p>
-              <p>{villager.personality}</p>
-              <p>{villager.species}</p>
-              <p>{villager.starSign}</p>
-              <p>{(villager.randomIslandSpawnProbability * 100).toFixed(2)}%</p>
-              <a href={villager.nookiPediaPage} target="_blank">
-                Nookiepedia
-              </a>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+    <li className="bg-white rounded-lg overflow-hidden border-gray-600 items-center flex justify-between p-4">
+      <Link href="/villager/[id]" as={`/villager/${villager.id}`}>
+        <div className="w-1/3 max-h-full">
+          <a>
+            <img
+              loading="lazy"
+              className="block h-full w-full"
+              src={villager.picture.medium}
+              alt={`Picture of ${villager.name}`}
+            />
+          </a>
+        </div>
+      </Link>
+      <div className="w-2/3 pl-4">
+        <h4>{villager.name}</h4>
+        <p>{villager.frName}</p>
+        <p>{villager.gender}</p>
+        <p>{villager.personality}</p>
+        <p>{villager.species}</p>
+        <p>{villager.starSign}</p>
+        <p>{(villager.randomIslandSpawnProbability * 100).toFixed(2)}%</p>
+        <p>
+          {villager.campsiteProbability
+            ? `${(villager.campsiteProbability * 100).toFixed(2)}%`
+            : "N/A"}
+        </p>
+        <a href={villager.nookiPediaPage} target="_blank">
+          Nookiepedia
+        </a>
+      </div>
+    </li>
   );
 };
 

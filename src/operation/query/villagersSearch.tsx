@@ -6,40 +6,67 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 
 export type VillagersSearchQueryVariables = {
   search: Types.VillagerSearchInput;
+  start?: Types.Maybe<Types.Scalars['Int']>;
+  after?: Types.Maybe<Types.Scalars['String']>;
+  villageState?: Types.Maybe<Types.VillageStateInput>;
 };
 
 
 export type VillagersSearchQuery = (
   { __typename: 'Query' }
-  & { villagers: Array<(
-    { __typename: 'Villager' }
-    & Pick<Types.Villager, 'id' | 'name' | 'frName' | 'gender' | 'nookiPediaPage' | 'species' | 'personality' | 'starSign' | 'description' | 'saying' | 'randomIslandSpawnProbability'>
-    & { picture: Types.Maybe<(
-      { __typename: 'Picture' }
-      & Pick<Types.Picture, 'small' | 'big'>
-    )> }
-  )> }
+  & { villagers: (
+    { __typename: 'VillagersResultConnection' }
+    & { edges: Array<(
+      { __typename: 'VillagersResultEdge' }
+      & Pick<Types.VillagersResultEdge, 'cursor'>
+      & { node: (
+        { __typename: 'Villager' }
+        & Pick<Types.Villager, 'id' | 'name' | 'frName' | 'gender' | 'nookiPediaPage' | 'species' | 'personality' | 'starSign' | 'description' | 'saying' | 'randomIslandSpawnProbability' | 'campsiteProbability'>
+        & { picture?: Types.Maybe<(
+          { __typename: 'Picture' }
+          & Pick<Types.Picture, 'thumb' | 'medium' | 'full'>
+        )> }
+      ) }
+    )>, pageInfo: (
+      { __typename: 'PageInfo' }
+      & Pick<Types.PageInfo, 'hasNextPage' | 'hasPreviousPage' | 'startCursor' | 'endCursor'>
+    ) }
+  ) }
 );
 
 
 export const VillagersSearchDocument = gql`
-    query villagersSearch($search: VillagerSearchInput!) {
-  villagers(search: $search) {
-    id
-    name
-    frName
-    gender
-    picture {
-      small
-      big
+    query villagersSearch($search: VillagerSearchInput!, $start: Int = 20, $after: String, $villageState: VillageStateInput) {
+  villagers(search: $search, start: $start, after: $after) @connection(key: "villagers", filter: ["search"]) {
+    __typename
+    edges {
+      cursor
+      node {
+        id
+        name
+        frName
+        gender
+        picture {
+          thumb
+          medium
+          full
+        }
+        nookiPediaPage
+        species
+        personality
+        starSign
+        description
+        saying
+        randomIslandSpawnProbability
+        campsiteProbability(villageState: $villageState)
+      }
     }
-    nookiPediaPage
-    species
-    personality
-    starSign
-    description
-    saying
-    randomIslandSpawnProbability
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }
     `;
@@ -57,6 +84,9 @@ export const VillagersSearchDocument = gql`
  * const { data, loading, error } = useVillagersSearchQuery({
  *   variables: {
  *      search: // value for 'search'
+ *      start: // value for 'start'
+ *      after: // value for 'after'
+ *      villageState: // value for 'villageState'
  *   },
  * });
  */

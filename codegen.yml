@@ -17,7 +17,6 @@ generates:
       withHOC: false
       withComponent: false
       nonOptionalTypename: true
-      avoidOptionals: true
     documents:
       - "src/**/*.graphql"
     plugins:
@@ -27,10 +26,10 @@ generates:
     plugins:
       - "typescript"
       - "typescript-resolvers"
-      - add: "import { DeepPartial } from 'utility-types';"
     config:
+      wrapFieldDefinitions: true
+      fieldWrapperValue: "TypeResolveFn<T> | T"
       useIndexSignature: true
-      defaultMapper: DeepPartial<{T}>
   ./graphql.schema.json:
     plugins:
       - "introspection"

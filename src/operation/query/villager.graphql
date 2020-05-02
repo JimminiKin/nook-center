@@ -4,10 +4,6 @@ query villager($villagerId: ID!) {
     name
     frName
     gender
-    picture {
-      small
-      big
-    }
     nookiPediaPage
     species
     personality

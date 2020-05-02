@@ -1,19 +1,39 @@
-query villagersSearch($search: VillagerSearchInput!) {
-  villagers(search: $search) {
-    id
-    name
-    frName
-    gender
-    picture {
-      small
-      big
+query villagersSearch(
+  $search: VillagerSearchInput!
+  $start: Int = 20
+  $after: String
+  $villageState: VillageStateInput
+) {
+  villagers(search: $search, start: $start, after: $after)
+    @connection(key: "villagers", filter: ["search"]) {
+    __typename
+    edges {
+      cursor
+      node {
+        id
+        name
+        frName
+        gender
+        picture {
+          thumb
+          medium
+          full
+        }
+        nookiPediaPage
+        species
+        personality
+        starSign
+        description
+        saying
+        randomIslandSpawnProbability
+        campsiteProbability(villageState: $villageState)
+      }
     }
-    nookiPediaPage
-    species
-    personality
-    starSign
-    description
-    saying
-    randomIslandSpawnProbability
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }

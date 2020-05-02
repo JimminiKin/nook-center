@@ -1,6 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { DeepPartial } from 'utility-types';
 export type Maybe<T> = T | null;
+export type FieldWrapper<T> = TypeResolveFn<T> | T;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -18,28 +18,28 @@ export enum Gender {
 
 export type Island = {
    __typename?: 'Island';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  picture: Scalars['String'];
-  maxOneDailyVisit: Scalars['Boolean'];
-  probability: Scalars['Float'];
-  requirements?: Maybe<Scalars['String']>;
-  description: Scalars['String'];
-  trees: Scalars['String'];
-  treesBadSpecial: Scalars['Boolean'];
-  treesGoodSpecial: Scalars['Boolean'];
-  flowers: Scalars['String'];
-  flowersBadSpecial: Scalars['Boolean'];
-  flowersGoodSpecial: Scalars['Boolean'];
-  rocks: Scalars['String'];
-  rocksBadSpecial: Scalars['Boolean'];
-  rocksGoodSpecial: Scalars['Boolean'];
-  insects: Scalars['String'];
-  insectsBadSpecial: Scalars['Boolean'];
-  insectsGoodSpecial: Scalars['Boolean'];
-  fishes: Scalars['String'];
-  fishesBadSpecial: Scalars['Boolean'];
-  fishesGoodSpecial: Scalars['Boolean'];
+  id: FieldWrapper<Scalars['ID']>;
+  name: FieldWrapper<Scalars['String']>;
+  picture: FieldWrapper<Scalars['String']>;
+  maxOneDailyVisit: FieldWrapper<Scalars['Boolean']>;
+  probability: FieldWrapper<Scalars['Float']>;
+  requirements?: Maybe<FieldWrapper<Scalars['String']>>;
+  description: FieldWrapper<Scalars['String']>;
+  trees: FieldWrapper<Scalars['String']>;
+  treesBadSpecial: FieldWrapper<Scalars['Boolean']>;
+  treesGoodSpecial: FieldWrapper<Scalars['Boolean']>;
+  flowers: FieldWrapper<Scalars['String']>;
+  flowersBadSpecial: FieldWrapper<Scalars['Boolean']>;
+  flowersGoodSpecial: FieldWrapper<Scalars['Boolean']>;
+  rocks: FieldWrapper<Scalars['String']>;
+  rocksBadSpecial: FieldWrapper<Scalars['Boolean']>;
+  rocksGoodSpecial: FieldWrapper<Scalars['Boolean']>;
+  insects: FieldWrapper<Scalars['String']>;
+  insectsBadSpecial: FieldWrapper<Scalars['Boolean']>;
+  insectsGoodSpecial: FieldWrapper<Scalars['Boolean']>;
+  fishes: FieldWrapper<Scalars['String']>;
+  fishesBadSpecial: FieldWrapper<Scalars['Boolean']>;
+  fishesGoodSpecial: FieldWrapper<Scalars['Boolean']>;
 };
 
 export type IslandSearchInput = {
@@ -55,10 +55,16 @@ export type IslandSearchInput = {
   fishesGoodSpecial?: Maybe<Scalars['Boolean']>;
 };
 
-export type NewVillagerProbaInput = {
-  currentVillagers: Array<Scalars['ID']>;
-  pastVillagers: Array<Scalars['ID']>;
-  pastCampers: Array<Scalars['ID']>;
+export type Node = {
+  id: FieldWrapper<Scalars['ID']>;
+};
+
+export type PageInfo = {
+   __typename?: 'PageInfo';
+  hasNextPage: FieldWrapper<Scalars['Boolean']>;
+  hasPreviousPage: FieldWrapper<Scalars['Boolean']>;
+  startCursor?: Maybe<FieldWrapper<Scalars['String']>>;
+  endCursor?: Maybe<FieldWrapper<Scalars['String']>>;
 };
 
 export enum Personality {
@@ -74,17 +80,17 @@ export enum Personality {
 
 export type Picture = {
    __typename?: 'Picture';
-  small: Scalars['String'];
-  big: Scalars['String'];
+  thumb: FieldWrapper<Scalars['String']>;
+  medium: FieldWrapper<Scalars['String']>;
+  full: FieldWrapper<Scalars['String']>;
 };
 
 export type Query = {
    __typename?: 'Query';
-  villager?: Maybe<Villager>;
-  villagers: Array<Villager>;
-  island?: Maybe<Island>;
-  islands: Array<Island>;
-  newVillagerProba: Array<VillagerProbaOutput>;
+  villager?: Maybe<FieldWrapper<Villager>>;
+  villagers: FieldWrapper<VillagersResultConnection>;
+  island?: Maybe<FieldWrapper<Island>>;
+  islands: Array<FieldWrapper<Island>>;
 };
 
 
@@ -94,7 +100,9 @@ export type QueryVillagerArgs = {
 
 
 export type QueryVillagersArgs = {
-  search: VillagerSearchInput;
+  start?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  search?: Maybe<VillagerSearchInput>;
 };
 
 
@@ -105,11 +113,6 @@ export type QueryIslandArgs = {
 
 export type QueryIslandsArgs = {
   search: IslandSearchInput;
-};
-
-
-export type QueryNewVillagerProbaArgs = {
-  input: NewVillagerProbaInput;
 };
 
 export enum RelationshipQuality {
@@ -171,30 +174,27 @@ export enum StarSign {
   Leo = 'LEO'
 }
 
-export type Villager = {
+export type Villager = Node & {
    __typename?: 'Villager';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  frName: Scalars['String'];
-  gender: Gender;
-  picture?: Maybe<Picture>;
-  nookiPediaPage: Scalars['String'];
-  species: Species;
-  personality: Personality;
-  relationShips: Array<Personality>;
-  starSign: StarSign;
-  birthday: Scalars['String'];
-  description: Scalars['String'];
-  saying: Scalars['String'];
-  randomIslandSpawnProbability: Scalars['Float'];
-  congeners: Array<Maybe<Villager>>;
-  getsAlong: Array<Maybe<Villager>>;
+  id: FieldWrapper<Scalars['ID']>;
+  name: FieldWrapper<Scalars['String']>;
+  frName: FieldWrapper<Scalars['String']>;
+  gender: FieldWrapper<Gender>;
+  picture?: Maybe<FieldWrapper<Picture>>;
+  nookiPediaPage: FieldWrapper<Scalars['String']>;
+  species: FieldWrapper<Species>;
+  personality: FieldWrapper<Personality>;
+  starSign: FieldWrapper<StarSign>;
+  birthday: FieldWrapper<Scalars['String']>;
+  description: FieldWrapper<Scalars['String']>;
+  saying: FieldWrapper<Scalars['String']>;
+  randomIslandSpawnProbability: FieldWrapper<Scalars['Float']>;
+  campsiteProbability?: Maybe<FieldWrapper<Scalars['Float']>>;
 };
 
-export type VillagerProbaOutput = {
-   __typename?: 'VillagerProbaOutput';
-  villager: Villager;
-  probability: Scalars['Float'];
+
+export type VillagerCampsiteProbabilityArgs = {
+  villageState?: Maybe<VillageStateInput>;
 };
 
 export type VillagerSearchInput = {
@@ -203,6 +203,24 @@ export type VillagerSearchInput = {
   species?: Maybe<Species>;
   gender?: Maybe<Gender>;
   starSign?: Maybe<StarSign>;
+};
+
+export type VillagersResultConnection = {
+   __typename?: 'VillagersResultConnection';
+  edges: Array<FieldWrapper<VillagersResultEdge>>;
+  pageInfo: FieldWrapper<PageInfo>;
+};
+
+export type VillagersResultEdge = {
+   __typename?: 'VillagersResultEdge';
+  cursor: FieldWrapper<Scalars['String']>;
+  node: FieldWrapper<Villager>;
+};
+
+export type VillageStateInput = {
+  currentVillagers: Array<Scalars['ID']>;
+  pastVillagers: Array<Scalars['ID']>;
+  pastCampers: Array<Scalars['ID']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -280,43 +298,51 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>,
-  ID: ResolverTypeWrapper<DeepPartial<Scalars['ID']>>,
-  Villager: ResolverTypeWrapper<DeepPartial<Villager>>,
-  String: ResolverTypeWrapper<DeepPartial<Scalars['String']>>,
-  Gender: ResolverTypeWrapper<DeepPartial<Gender>>,
-  Picture: ResolverTypeWrapper<DeepPartial<Picture>>,
-  Species: ResolverTypeWrapper<DeepPartial<Species>>,
-  Personality: ResolverTypeWrapper<DeepPartial<Personality>>,
-  StarSign: ResolverTypeWrapper<DeepPartial<StarSign>>,
-  Float: ResolverTypeWrapper<DeepPartial<Scalars['Float']>>,
-  VillagerSearchInput: ResolverTypeWrapper<DeepPartial<VillagerSearchInput>>,
-  Island: ResolverTypeWrapper<DeepPartial<Island>>,
-  Boolean: ResolverTypeWrapper<DeepPartial<Scalars['Boolean']>>,
-  IslandSearchInput: ResolverTypeWrapper<DeepPartial<IslandSearchInput>>,
-  NewVillagerProbaInput: ResolverTypeWrapper<DeepPartial<NewVillagerProbaInput>>,
-  VillagerProbaOutput: ResolverTypeWrapper<DeepPartial<VillagerProbaOutput>>,
-  RelationshipQuality: ResolverTypeWrapper<DeepPartial<RelationshipQuality>>,
+  ID: ResolverTypeWrapper<Scalars['ID']>,
+  Villager: ResolverTypeWrapper<Villager>,
+  Node: ResolversTypes['Villager'],
+  String: ResolverTypeWrapper<Scalars['String']>,
+  Gender: Gender,
+  Picture: ResolverTypeWrapper<Picture>,
+  Species: Species,
+  Personality: Personality,
+  StarSign: StarSign,
+  Float: ResolverTypeWrapper<Scalars['Float']>,
+  VillageStateInput: VillageStateInput,
+  Int: ResolverTypeWrapper<Scalars['Int']>,
+  VillagerSearchInput: VillagerSearchInput,
+  VillagersResultConnection: ResolverTypeWrapper<VillagersResultConnection>,
+  VillagersResultEdge: ResolverTypeWrapper<VillagersResultEdge>,
+  PageInfo: ResolverTypeWrapper<PageInfo>,
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  Island: ResolverTypeWrapper<Island>,
+  IslandSearchInput: IslandSearchInput,
+  RelationshipQuality: RelationshipQuality,
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Query: {},
-  ID: DeepPartial<Scalars['ID']>,
-  Villager: DeepPartial<Villager>,
-  String: DeepPartial<Scalars['String']>,
-  Gender: DeepPartial<Gender>,
-  Picture: DeepPartial<Picture>,
-  Species: DeepPartial<Species>,
-  Personality: DeepPartial<Personality>,
-  StarSign: DeepPartial<StarSign>,
-  Float: DeepPartial<Scalars['Float']>,
-  VillagerSearchInput: DeepPartial<VillagerSearchInput>,
-  Island: DeepPartial<Island>,
-  Boolean: DeepPartial<Scalars['Boolean']>,
-  IslandSearchInput: DeepPartial<IslandSearchInput>,
-  NewVillagerProbaInput: DeepPartial<NewVillagerProbaInput>,
-  VillagerProbaOutput: DeepPartial<VillagerProbaOutput>,
-  RelationshipQuality: DeepPartial<RelationshipQuality>,
+  ID: Scalars['ID'],
+  Villager: Villager,
+  Node: ResolversParentTypes['Villager'],
+  String: Scalars['String'],
+  Gender: Gender,
+  Picture: Picture,
+  Species: Species,
+  Personality: Personality,
+  StarSign: StarSign,
+  Float: Scalars['Float'],
+  VillageStateInput: VillageStateInput,
+  Int: Scalars['Int'],
+  VillagerSearchInput: VillagerSearchInput,
+  VillagersResultConnection: VillagersResultConnection,
+  VillagersResultEdge: VillagersResultEdge,
+  PageInfo: PageInfo,
+  Boolean: Scalars['Boolean'],
+  Island: Island,
+  IslandSearchInput: IslandSearchInput,
+  RelationshipQuality: RelationshipQuality,
 }>;
 
 export type IslandResolvers<ContextType = any, ParentType extends ResolversParentTypes['Island'] = ResolversParentTypes['Island']> = ResolversObject<{
@@ -345,18 +371,31 @@ export type IslandResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 
+export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Villager', ParentType, ContextType>,
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
+}>;
+
+export type PageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = ResolversObject<{
+  hasNextPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  hasPreviousPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  startCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  endCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+}>;
+
 export type PictureResolvers<ContextType = any, ParentType extends ResolversParentTypes['Picture'] = ResolversParentTypes['Picture']> = ResolversObject<{
-  small?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  big?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  thumb?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  medium?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  full?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   villager?: Resolver<Maybe<ResolversTypes['Villager']>, ParentType, ContextType, RequireFields<QueryVillagerArgs, 'villagerId'>>,
-  villagers?: Resolver<Array<ResolversTypes['Villager']>, ParentType, ContextType, RequireFields<QueryVillagersArgs, 'search'>>,
+  villagers?: Resolver<ResolversTypes['VillagersResultConnection'], ParentType, ContextType, RequireFields<QueryVillagersArgs, 'start'>>,
   island?: Resolver<Maybe<ResolversTypes['Island']>, ParentType, ContextType, RequireFields<QueryIslandArgs, 'islandId'>>,
   islands?: Resolver<Array<ResolversTypes['Island']>, ParentType, ContextType, RequireFields<QueryIslandsArgs, 'search'>>,
-  newVillagerProba?: Resolver<Array<ResolversTypes['VillagerProbaOutput']>, ParentType, ContextType, RequireFields<QueryNewVillagerProbaArgs, 'input'>>,
 }>;
 
 export type VillagerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Villager'] = ResolversParentTypes['Villager']> = ResolversObject<{
@@ -368,29 +407,36 @@ export type VillagerResolvers<ContextType = any, ParentType extends ResolversPar
   nookiPediaPage?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   species?: Resolver<ResolversTypes['Species'], ParentType, ContextType>,
   personality?: Resolver<ResolversTypes['Personality'], ParentType, ContextType>,
-  relationShips?: Resolver<Array<ResolversTypes['Personality']>, ParentType, ContextType>,
   starSign?: Resolver<ResolversTypes['StarSign'], ParentType, ContextType>,
   birthday?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   saying?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   randomIslandSpawnProbability?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
-  congeners?: Resolver<Array<Maybe<ResolversTypes['Villager']>>, ParentType, ContextType>,
-  getsAlong?: Resolver<Array<Maybe<ResolversTypes['Villager']>>, ParentType, ContextType>,
+  campsiteProbability?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType, RequireFields<VillagerCampsiteProbabilityArgs, never>>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 
-export type VillagerProbaOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['VillagerProbaOutput'] = ResolversParentTypes['VillagerProbaOutput']> = ResolversObject<{
-  villager?: Resolver<ResolversTypes['Villager'], ParentType, ContextType>,
-  probability?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+export type VillagersResultConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VillagersResultConnection'] = ResolversParentTypes['VillagersResultConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VillagersResultEdge']>, ParentType, ContextType>,
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+}>;
+
+export type VillagersResultEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VillagersResultEdge'] = ResolversParentTypes['VillagersResultEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  node?: Resolver<ResolversTypes['Villager'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
   Island?: IslandResolvers<ContextType>,
+  Node?: NodeResolvers,
+  PageInfo?: PageInfoResolvers<ContextType>,
   Picture?: PictureResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   Villager?: VillagerResolvers<ContextType>,
-  VillagerProbaOutput?: VillagerProbaOutputResolvers<ContextType>,
+  VillagersResultConnection?: VillagersResultConnectionResolvers<ContextType>,
+  VillagersResultEdge?: VillagersResultEdgeResolvers<ContextType>,
 }>;
 
 
@@ -399,4 +445,3 @@ export type Resolvers<ContextType = any> = ResolversObject<{
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
-

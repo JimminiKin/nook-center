@@ -11,13 +11,9 @@ export type VillagerQueryVariables = {
 
 export type VillagerQuery = (
   { __typename: 'Query' }
-  & { villager: Types.Maybe<(
+  & { villager?: Types.Maybe<(
     { __typename: 'Villager' }
     & Pick<Types.Villager, 'id' | 'name' | 'frName' | 'gender' | 'nookiPediaPage' | 'species' | 'personality' | 'starSign' | 'description' | 'saying' | 'randomIslandSpawnProbability'>
-    & { picture: Types.Maybe<(
-      { __typename: 'Picture' }
-      & Pick<Types.Picture, 'small' | 'big'>
-    )> }
   )> }
 );
 
@@ -29,10 +25,6 @@ export const VillagerDocument = gql`
     name
     frName
     gender
-    picture {
-      small
-      big
-    }
     nookiPediaPage
     species
     personality

@@ -5,7 +5,6 @@ import {
   StarSign,
   Villager,
   RelationshipQuality,
-  VillagerProbaOutput,
   Island,
 } from "@gen/common/graphql";
 

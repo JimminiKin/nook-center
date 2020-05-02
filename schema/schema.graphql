@@ -1,3 +1,41 @@
+type Query {
+  villager(villagerId: ID!): Villager
+  villagers(
+    start: Int = 20
+    after: String
+    search: VillagerSearchInput
+  ): VillagersResultConnection!
+  island(islandId: ID!): Island
+  islands(search: IslandSearchInput!): [Island!]!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+input VillageStateInput {
+  currentVillagers: [ID!]!
+  pastVillagers: [ID!]!
+  pastCampers: [ID!]!
+}
+
+type VillagersResultConnection {
+  edges: [VillagersResultEdge!]!
+  pageInfo: PageInfo!
+}
+
+type VillagersResultEdge {
+  cursor: String!
+  node: Villager!
+}
+
 input VillagerSearchInput {
   text: String
   personality: Personality
@@ -19,23 +57,55 @@ input IslandSearchInput {
   fishesGoodSpecial: Boolean
 }
 
-input NewVillagerProbaInput {
-  currentVillagers: [ID!]!
-  pastVillagers: [ID!]!
-  pastCampers: [ID!]!
+type Picture {
+  thumb: String!
+  medium: String!
+  full: String!
 }
 
-type VillagerProbaOutput {
-  villager: Villager!
+type Villager implements Node {
+  id: ID!
+  name: String!
+  frName: String!
+  # translation: Translations
+  gender: Gender!
+  picture: Picture
+  nookiPediaPage: String!
+  species: Species!
+  personality: Personality!
+  starSign: StarSign!
+  birthday: String!
+  description: String!
+  saying: String!
+  randomIslandSpawnProbability: Float!
+  campsiteProbability(villageState: VillageStateInput): Float
+  # congeners: [Villager]!
+  # getsAlong: [Villager]!
+}
+
+type Island {
+  id: ID!
+  name: String!
+  picture: String!
+  maxOneDailyVisit: Boolean!
   probability: Float!
-}
-
-type Query {
-  villager(villagerId: ID!): Villager
-  villagers(search: VillagerSearchInput!): [Villager!]!
-  island(islandId: ID!): Island
-  islands(search: IslandSearchInput!): [Island!]!
-  newVillagerProba(input: NewVillagerProbaInput!): [VillagerProbaOutput!]!
+  requirements: String
+  description: String!
+  trees: String!
+  treesBadSpecial: Boolean!
+  treesGoodSpecial: Boolean!
+  flowers: String!
+  flowersBadSpecial: Boolean!
+  flowersGoodSpecial: Boolean!
+  rocks: String!
+  rocksBadSpecial: Boolean!
+  rocksGoodSpecial: Boolean!
+  insects: String!
+  insectsBadSpecial: Boolean!
+  insectsGoodSpecial: Boolean!
+  fishes: String!
+  fishesBadSpecial: Boolean!
+  fishesGoodSpecial: Boolean!
 }
 
 enum RelationshipQuality {
@@ -112,79 +182,3 @@ enum StarSign {
   CAPRICORN
   LEO
 }
-
-type Picture {
-  small: String!
-  big: String!
-}
-
-type Villager {
-  id: ID!
-  name: String!
-  frName: String!
-  # translation: Translations
-  gender: Gender!
-  picture: Picture
-  nookiPediaPage: String!
-  species: Species!
-  personality: Personality!
-  relationShips: [Personality!]!
-  starSign: StarSign!
-  birthday: String!
-  description: String!
-  saying: String!
-  randomIslandSpawnProbability: Float!
-  congeners: [Villager]!
-  getsAlong: [Villager]!
-}
-
-type Island {
-  id: ID!
-  name: String!
-  picture: String!
-  maxOneDailyVisit: Boolean!
-  probability: Float!
-  requirements: String
-  description: String!
-  trees: String!
-  treesBadSpecial: Boolean!
-  treesGoodSpecial: Boolean!
-  flowers: String!
-  flowersBadSpecial: Boolean!
-  flowersGoodSpecial: Boolean!
-  rocks: String!
-  rocksBadSpecial: Boolean!
-  rocksGoodSpecial: Boolean!
-  insects: String!
-  insectsBadSpecial: Boolean!
-  insectsGoodSpecial: Boolean!
-  fishes: String!
-  fishesBadSpecial: Boolean!
-  fishesGoodSpecial: Boolean!
-}
-
-# type Critter {
-#     name: Translatable!
-# }
-
-# type Fish {
-#     name: Translatable!
-# }
-
-# type Fossils {
-#     name: Translatable!
-
-# }
-
-# type Material {
-#     name: Translatable!
-# }
-
-# type DIYMaterialConnection {
-
-# }
-
-# type DIY {
-#     name: Translatable!
-#     materials: []
-# }
