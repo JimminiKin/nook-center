@@ -252,12 +252,11 @@ const VillagerCard: React.FC<{
             </span>
           </p>
           <p>
-            <CampsiteProbability villagerId={villager.id}></CampsiteProbability>
+            <CampsiteProbability villagerId={villager.id} />
           </p>
         </div>
       </div>
-
-      <VillagerStateToggles villagerId={villager.id}></VillagerStateToggles>
+      <VillagerStateToggles villagerId={villager.id} />
     </li>
   );
 };

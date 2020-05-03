@@ -46,7 +46,7 @@ const VillagerStateToggles: React.FC<{
           >
             <span className="mr-1">⛺ ➖</span>
           </button>
-          <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+          <span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
             <span>Unmark as past campsite visitors</span>
           </span>
         </div>
