@@ -50,6 +50,7 @@ const PastCampersProvider: React.FC = (props) => {
     "Zell",
     "Olive",
     "Beardo",
+    "Camofrog",
   ]);
 
   const addPastCamper: PastCampersContextType["addPastCamper"] = (
