@@ -1,35 +1,38 @@
 overwrite: true
-schema: "schema/schema.graphql"
+schema: 'schema/schema.graphql'
+hooks:
+  afterOneFileWrite:
+    - prettier --write
 generates:
   src/generated/graphql.d.ts:
     plugins:
-      - "typescript-graphql-files-modules"
+      - 'typescript-graphql-files-modules'
   src/generated/common/graphql.ts:
     plugins:
-      - "typescript"
+      - 'typescript'
   src/:
     preset: near-operation-file
     presetConfig:
       extension: .tsx
-      baseTypesPath: "generated/common/graphql.ts"
+      baseTypesPath: 'generated/common/graphql.ts'
     config:
       withHooks: true
       withHOC: false
       withComponent: false
       nonOptionalTypename: true
     documents:
-      - "src/**/*.graphql"
+      - 'src/**/*.graphql'
     plugins:
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
   src/generated/server/graphql.ts:
     plugins:
-      - "typescript"
-      - "typescript-resolvers"
+      - 'typescript'
+      - 'typescript-resolvers'
       - add: "import { DeepPartial } from 'utility-types';"
     config:
       defaultMapper: DeepPartial<{T}>
       useIndexSignature: true
   ./graphql.schema.json:
     plugins:
-      - "introspection"
+      - 'introspection'

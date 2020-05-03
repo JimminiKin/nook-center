@@ -1,25 +1,21 @@
 import React from 'react';
 import {VillageStateInput} from '@gen/common/graphql';
-import {useCampsiteProbabilityQuery} from '@query/campsiteProbability';
+import {useIslandProbabilityQuery} from '@query/islandProbability';
 
 import {CurrentInhabitantsContext} from '@components/contexts/CurrentInhabitantsContext';
-import {PastInhabitantsContext} from '@components/contexts/PastInhabitantsContext';
-import {PastCampersContext} from '@components/contexts/PastCampersContext';
 
 const CampsiteProbability: React.FC<{
 	villagerId: string;
 }> = ({villagerId}) => {
 	const {currentInhabitants} = React.useContext(CurrentInhabitantsContext);
-	const {pastInhabitants} = React.useContext(PastInhabitantsContext);
-	const {pastCampers} = React.useContext(PastCampersContext);
 
 	let villageState: VillageStateInput = {
 		currentVillagers: currentInhabitants,
-		pastVillagers: pastInhabitants,
-		pastCampers,
+		pastVillagers: [],
+		pastCampers: [],
 	};
 
-	const {loading, error, data} = useCampsiteProbabilityQuery({
+	const {loading, error, data} = useIslandProbabilityQuery({
 		variables: {
 			villagerId,
 			villageState,
@@ -37,11 +33,11 @@ const CampsiteProbability: React.FC<{
 	return (
 		<span className="tooltip">
 			<span className="whitespace-no-wrap">
-				<span className="mr-1">⛺</span>
-				<span className="text-sm">{(data.villager.campsiteProbability * 100).toFixed(2)}%</span>
+				<span className="mr-1">🏝</span>
+				<span className="text-sm">{(data.villager.islandProbability * 100).toFixed(2)}%</span>
 			</span>
 			<span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
-				<span>Probability of spawn in campsite</span>
+				<span>Probability of spawn in on random island</span>
 			</span>
 		</span>
 	);

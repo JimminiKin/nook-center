@@ -1,0 +1,5 @@
+query islandProbability($villagerId: ID!, $villageState: VillageStateInput) {
+	villager(villagerId: $villagerId) {
+		islandProbability(villageState: $villageState)
+	}
+}

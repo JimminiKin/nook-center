@@ -20,7 +20,8 @@
       "@data/*": ["data/*"],
       "@components/*": ["src/components/*"],
       "@gen/*": ["src/generated/*"],
-      "@query/*": ["src/operation/query/*"]
+      "@query/*": ["src/operation/query/*"],
+      "@fragment/*": ["src/operation/fragment/*"]
     }
   },
   "exclude": ["node_modules"],

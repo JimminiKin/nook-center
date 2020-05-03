@@ -1,15 +1,14 @@
 query villager($villagerId: ID!) {
-  villager(villagerId: $villagerId) {
-    id
-    name
-    frName
-    gender
-    nookiPediaPage
-    species
-    personality
-    starSign
-    description
-    saying
-    randomIslandSpawnProbability
-  }
+	villager(villagerId: $villagerId) {
+		id
+		name
+		frName
+		gender
+		nookiPediaPage
+		species
+		personality
+		starSign
+		description
+		saying
+	}
 }

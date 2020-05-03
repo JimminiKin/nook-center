@@ -1,39 +1,18 @@
-query villagersSearch(
-  $search: VillagerSearchInput!
-  $start: Int = 20
-  $after: String
-) {
-  villagers(search: $search, start: $start, after: $after)
-    @connection(key: "villagers", filter: ["search"]) {
-    __typename
-    edges {
-      cursor
-      node {
-        id
-        name
-        frName
-        gender
-        picture {
-          thumb
-          medium
-          full
-        }
-        nookiPediaPage
-        species
-        personality
-        starSign
-        description
-        saying
-        birthday
-        randomIslandSpawnProbability
-      }
-    }
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
-      count
-    }
-  }
+query villagersSearch($search: VillagerSearchInput!, $start: Int = 20, $after: String) {
+	villagers(search: $search, start: $start, after: $after) @connection(key: "villagers", filter: ["search"]) {
+		__typename
+		edges {
+			cursor
+			node {
+				...VillagerCard
+			}
+		}
+		pageInfo {
+			hasNextPage
+			hasPreviousPage
+			startCursor
+			endCursor
+			count
+		}
+	}
 }

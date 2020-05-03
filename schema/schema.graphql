@@ -68,7 +68,6 @@ type Villager implements Node {
   id: ID!
   name: String!
   frName: String!
-  # translation: Translations
   gender: Gender!
   picture: Picture
   nookiPediaPage: String!
@@ -78,8 +77,8 @@ type Villager implements Node {
   birthday: String!
   description: String!
   saying: String!
-  randomIslandSpawnProbability: Float!
-  campsiteProbability(villageState: VillageStateInput): Float
+  islandProbability(villageState: VillageStateInput): Float!
+  campsiteProbability(villageState: VillageStateInput): Float!
   getsAlong: [Villager]!
 }
 

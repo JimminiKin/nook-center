@@ -1,0 +1,12 @@
+fragment VillagerCard on Villager {
+	id
+	name
+	gender
+	picture {
+		medium
+	}
+	species
+	personality
+	starSign
+	birthday
+}

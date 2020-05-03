@@ -5,36 +5,43 @@ import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 
 export type VillagerQueryVariables = {
-  villagerId: Types.Scalars['ID'];
+	villagerId: Types.Scalars['ID'];
 };
 
-
-export type VillagerQuery = (
-  { __typename: 'Query' }
-  & { villager?: Types.Maybe<(
-    { __typename: 'Villager' }
-    & Pick<Types.Villager, 'id' | 'name' | 'frName' | 'gender' | 'nookiPediaPage' | 'species' | 'personality' | 'starSign' | 'description' | 'saying' | 'randomIslandSpawnProbability'>
-  )> }
-);
-
+export type VillagerQuery = {__typename: 'Query'} & {
+	villager?: Types.Maybe<
+		{__typename: 'Villager'} & Pick<
+			Types.Villager,
+			| 'id'
+			| 'name'
+			| 'frName'
+			| 'gender'
+			| 'nookiPediaPage'
+			| 'species'
+			| 'personality'
+			| 'starSign'
+			| 'description'
+			| 'saying'
+		>
+	>;
+};
 
 export const VillagerDocument = gql`
-    query villager($villagerId: ID!) {
-  villager(villagerId: $villagerId) {
-    id
-    name
-    frName
-    gender
-    nookiPediaPage
-    species
-    personality
-    starSign
-    description
-    saying
-    randomIslandSpawnProbability
-  }
-}
-    `;
+	query villager($villagerId: ID!) {
+		villager(villagerId: $villagerId) {
+			id
+			name
+			frName
+			gender
+			nookiPediaPage
+			species
+			personality
+			starSign
+			description
+			saying
+		}
+	}
+`;
 
 /**
  * __useVillagerQuery__
@@ -52,12 +59,16 @@ export const VillagerDocument = gql`
  *   },
  * });
  */
-export function useVillagerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<VillagerQuery, VillagerQueryVariables>) {
-        return ApolloReactHooks.useQuery<VillagerQuery, VillagerQueryVariables>(VillagerDocument, baseOptions);
-      }
-export function useVillagerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<VillagerQuery, VillagerQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<VillagerQuery, VillagerQueryVariables>(VillagerDocument, baseOptions);
-        }
+export function useVillagerQuery(
+	baseOptions?: ApolloReactHooks.QueryHookOptions<VillagerQuery, VillagerQueryVariables>,
+) {
+	return ApolloReactHooks.useQuery<VillagerQuery, VillagerQueryVariables>(VillagerDocument, baseOptions);
+}
+export function useVillagerLazyQuery(
+	baseOptions?: ApolloReactHooks.LazyQueryHookOptions<VillagerQuery, VillagerQueryVariables>,
+) {
+	return ApolloReactHooks.useLazyQuery<VillagerQuery, VillagerQueryVariables>(VillagerDocument, baseOptions);
+}
 export type VillagerQueryHookResult = ReturnType<typeof useVillagerQuery>;
 export type VillagerLazyQueryHookResult = ReturnType<typeof useVillagerLazyQuery>;
 export type VillagerQueryResult = ApolloReactCommon.QueryResult<VillagerQuery, VillagerQueryVariables>;

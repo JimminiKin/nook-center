@@ -5,27 +5,21 @@ import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 
 export type CampsiteProbabilityQueryVariables = {
-  villagerId: Types.Scalars['ID'];
-  villageState?: Types.Maybe<Types.VillageStateInput>;
+	villagerId: Types.Scalars['ID'];
+	villageState?: Types.Maybe<Types.VillageStateInput>;
 };
 
-
-export type CampsiteProbabilityQuery = (
-  { __typename: 'Query' }
-  & { villager?: Types.Maybe<(
-    { __typename: 'Villager' }
-    & Pick<Types.Villager, 'campsiteProbability'>
-  )> }
-);
-
+export type CampsiteProbabilityQuery = {__typename: 'Query'} & {
+	villager?: Types.Maybe<{__typename: 'Villager'} & Pick<Types.Villager, 'campsiteProbability'>>;
+};
 
 export const CampsiteProbabilityDocument = gql`
-    query campsiteProbability($villagerId: ID!, $villageState: VillageStateInput) {
-  villager(villagerId: $villagerId) {
-    campsiteProbability(villageState: $villageState)
-  }
-}
-    `;
+	query campsiteProbability($villagerId: ID!, $villageState: VillageStateInput) {
+		villager(villagerId: $villagerId) {
+			campsiteProbability(villageState: $villageState)
+		}
+	}
+`;
 
 /**
  * __useCampsiteProbabilityQuery__
@@ -44,12 +38,25 @@ export const CampsiteProbabilityDocument = gql`
  *   },
  * });
  */
-export function useCampsiteProbabilityQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>) {
-        return ApolloReactHooks.useQuery<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>(CampsiteProbabilityDocument, baseOptions);
-      }
-export function useCampsiteProbabilityLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>(CampsiteProbabilityDocument, baseOptions);
-        }
+export function useCampsiteProbabilityQuery(
+	baseOptions?: ApolloReactHooks.QueryHookOptions<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>,
+) {
+	return ApolloReactHooks.useQuery<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>(
+		CampsiteProbabilityDocument,
+		baseOptions,
+	);
+}
+export function useCampsiteProbabilityLazyQuery(
+	baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>,
+) {
+	return ApolloReactHooks.useLazyQuery<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>(
+		CampsiteProbabilityDocument,
+		baseOptions,
+	);
+}
 export type CampsiteProbabilityQueryHookResult = ReturnType<typeof useCampsiteProbabilityQuery>;
 export type CampsiteProbabilityLazyQueryHookResult = ReturnType<typeof useCampsiteProbabilityLazyQuery>;
-export type CampsiteProbabilityQueryResult = ApolloReactCommon.QueryResult<CampsiteProbabilityQuery, CampsiteProbabilityQueryVariables>;
+export type CampsiteProbabilityQueryResult = ApolloReactCommon.QueryResult<
+	CampsiteProbabilityQuery,
+	CampsiteProbabilityQueryVariables
+>;
