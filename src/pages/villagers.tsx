@@ -190,72 +190,74 @@ const VillagerCard: React.FC<{
   villager: VillagersSearchQuery["villagers"]["edges"][0]["node"];
 }> = ({ villager }) => {
   return (
-    <li className="bg-white rounded-lg overflow-hidden border-gray-600 items-center flex justify-between p-4">
-      <Link
-        href="/villager/[id]"
-        as={`/villager/${villager.id}`}
-        prefetch={false}
-      >
-        <a className="block w-1/3 max-h-full cursor-pointer">
-          <img
-            loading="lazy"
-            className="block h-full w-full"
-            src={villager.picture.medium}
-            alt={`Picture of ${villager.name}`}
-          />
-        </a>
-      </Link>
-      <div className="w-1/3 pl-4">
+    <li className="bg-white rounded-lg overflow-hidden border-gray-600 ">
+      <div className="items-center flex justify-between p-4">
         <Link
           href="/villager/[id]"
           as={`/villager/${villager.id}`}
           prefetch={false}
         >
-          <a>
-            <h4 className="text-lg text-green-900 font-semibold">
-              {villager.name}
-            </h4>
+          <a className="block w-1/2 h-48 cursor-pointer ml-auto mr-auto relative">
+            <img
+              loading="lazy"
+              className="absolute m-auto top-0 left-0 right-0 bottom-0"
+              style={{ objectFit: "contain" }}
+              src={villager.picture.medium}
+              alt={`Picture of ${villager.name}`}
+            />
           </a>
         </Link>
-        <p>
-          {ucfirst(villager.species)} |{" "}
-          <span className="tooltip">
-            {getGenderEmoji(villager.gender)}
-            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
-              {ucfirst(villager.gender)}
-            </span>
-          </span>
-        </p>
-        <p>{ucfirst(villager.personality)}</p>
-        <p>
-          <span className="tooltip">
-            {getZodiacEmoji(villager.starSign)}
-            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
-              {ucfirst(villager.starSign)}
-            </span>
-          </span>
-          <span className="ml-1 text-sm">{ucfirst(villager.birthday)}</span>
-        </p>
-        <p>
-          <span className="tooltip">
-            <span className="whitespace-no-wrap mr-1">
-              <span className="mr-1">🏝</span>
-              <span className="text-sm">
-                {(villager.randomIslandSpawnProbability * 100).toFixed(2)}%
+        <div className="w-1/2 pl-4">
+          <Link
+            href="/villager/[id]"
+            as={`/villager/${villager.id}`}
+            prefetch={false}
+          >
+            <a>
+              <h4 className="text-lg text-green-900 font-semibold">
+                {villager.name}
+              </h4>
+            </a>
+          </Link>
+          <p>
+            {ucfirst(villager.species)} |{" "}
+            <span className="tooltip">
+              {getGenderEmoji(villager.gender)}
+              <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+                {ucfirst(villager.gender)}
               </span>
             </span>
-            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
-              <span>Probability of spawn on random island</span>
+          </p>
+          <p>{ucfirst(villager.personality)}</p>
+          <p>
+            <span className="tooltip">
+              {getZodiacEmoji(villager.starSign)}
+              <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+                {ucfirst(villager.starSign)}
+              </span>
             </span>
-          </span>
-        </p>
-        <p>
-          <CampsiteProbability villagerId={villager.id}></CampsiteProbability>
-        </p>
+            <span className="ml-1 text-sm">{ucfirst(villager.birthday)}</span>
+          </p>
+          <p>
+            <span className="tooltip">
+              <span className="whitespace-no-wrap mr-1">
+                <span className="mr-1">🏝</span>
+                <span className="text-sm">
+                  {(villager.randomIslandSpawnProbability * 100).toFixed(2)}%
+                </span>
+              </span>
+              <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+                <span>Probability of spawn on random island</span>
+              </span>
+            </span>
+          </p>
+          <p>
+            <CampsiteProbability villagerId={villager.id}></CampsiteProbability>
+          </p>
+        </div>
       </div>
-      <div className="w-1/3 pl-4">
-        <VillagerStateToggles villagerId={villager.id}></VillagerStateToggles>
-      </div>
+
+      <VillagerStateToggles villagerId={villager.id}></VillagerStateToggles>
     </li>
   );
 };

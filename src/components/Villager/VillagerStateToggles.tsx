@@ -34,7 +34,7 @@ const VillagerStateToggles: React.FC<{
   const isCurrentInhabitant = currentInhabitants.includes(villagerId);
 
   return (
-    <div>
+    <div className="flex justify-evenly p-2">
       {isPastCamper ? (
         <div className="tooltip m-2">
           <button
@@ -61,7 +61,7 @@ const VillagerStateToggles: React.FC<{
           >
             <span className="mr-1">⛺ ➕</span>
           </button>
-          <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+          <span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
             <span>Mark as past campsite visitors</span>
           </span>
         </div>
@@ -77,7 +77,7 @@ const VillagerStateToggles: React.FC<{
           >
             <span className="mr-1">💨 ➖</span>
           </button>
-          <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+          <span className="tooltip-text bg-green-200 rounded -ml-8  mt-8">
             <span>Unmark as past island inhabitant</span>
           </span>
         </div>
@@ -92,7 +92,7 @@ const VillagerStateToggles: React.FC<{
           >
             <span className="mr-1">💨 ➕</span>
           </button>
-          <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+          <span className="tooltip-text bg-green-200 rounded -ml-8  mt-8">
             <span>Mark as past island inhabitant</span>
           </span>
         </div>
@@ -108,7 +108,7 @@ const VillagerStateToggles: React.FC<{
           >
             <span className="mr-1">🏠 ➖</span>
           </button>
-          <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+          <span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
             <span>Unmark as current island inhabitant</span>
           </span>
         </div>
@@ -123,7 +123,7 @@ const VillagerStateToggles: React.FC<{
           >
             <span className="mr-1">🏠 ➕</span>
           </button>
-          <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
+          <span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
             <span>Mark as current island inhabitant</span>
           </span>
         </div>
