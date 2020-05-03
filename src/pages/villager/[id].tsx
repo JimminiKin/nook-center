@@ -50,7 +50,7 @@ const Villager: NextPage = () => {
   return (
     <>
       <Head>
-        <title>My page title</title>
+        <title>{data.villager.name} - Villager - Nook Center</title>
       </Head>
       {loading ? (
         <div className="items-center flex justify-around p-56">

@@ -50,7 +50,7 @@ const VillagerIndex: NextPage = (props) => {
   return (
     <>
       <Head>
-        <title>My page title</title>
+        <title>Villager Search - Nook Center</title>
       </Head>
       <div className="p-4 lg:flex lg:justify-evenly">
         <input
@@ -60,6 +60,7 @@ const VillagerIndex: NextPage = (props) => {
           onChange={(event) => setSearchText(event.target.value)}
           placeholder="Text Search"
         />
+
         <select
           value={gender || ""}
           className="inline-block p-2 m-4"
@@ -156,9 +157,9 @@ const VillagerIndex: NextPage = (props) => {
             });
           }}
           loader={
-            <div key="loader" className="items-center flex justify-center p-20">
+            <li key="loader" className="items-center flex justify-center p-20">
               <h4>Loading More ...</h4>
-            </div>
+            </li>
           }
         >
           {data.villagers.edges.map((edge) => {

@@ -73,6 +73,10 @@ const HeadLinks: React.FC = () => {
         href="/icons/favicon-16x16.png"
       />
       <link rel="manifest" href="/manifest.json" />
+      <meta
+        name="description"
+        content="All Things Nook Related - Animal Crossing New Horizons"
+      />
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta
         name="msapplication-TileImage"
