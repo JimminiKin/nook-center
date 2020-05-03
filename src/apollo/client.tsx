@@ -139,10 +139,11 @@ function createIsomorphLink() {
     const schema = require("./schema").default;
     return new SchemaLink({ schema });
   } else {
-    const { HttpLink } = require("apollo-link-http");
-    return new HttpLink({
+    const { BatchHttpLink } = require("apollo-link-batch-http");
+    return new BatchHttpLink({
       uri: "/api/graphql",
       credentials: "same-origin",
+      batchMax: 30,
     });
   }
 }

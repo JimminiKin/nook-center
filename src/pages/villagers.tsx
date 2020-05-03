@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { NextPage } from "next";
 import Link from "next/link";
 import InfiniteScroller from "react-infinite-scroller";
@@ -7,6 +8,12 @@ import InfiniteScroller from "react-infinite-scroller";
 import { withApollo } from "@apollo/client";
 
 import { ucfirst, getGenderEmoji, getZodiacEmoji } from "@modules/utils";
+// import CampsiteProbability from "@components/Villager/CampsiteProbability";
+
+const CampsiteProbability = dynamic(
+  () => import("@components/Villager/CampsiteProbability"),
+  { ssr: false }
+);
 
 import {
   useVillagersSearchQuery,
@@ -23,38 +30,6 @@ const VillagerIndex: NextPage = (props) => {
   const [starSign, setStarSign] = React.useState<string>("");
   const [searchText, setSearchText] = React.useState<string>("");
 
-  let villageState: VillageStateInput = {
-    currentVillagers: [
-      "Filbert",
-      "Snooty",
-      "Octavian",
-      "Maddie",
-      "Phoebe",
-      "Flora",
-      "Peck",
-      "Fauna",
-      "Dizzy",
-      "Tom",
-    ],
-    pastVillagers: ["Reneigh", "Louie", "Huck", "Chadder", "Alli", "Lyman"],
-    pastCampers: [
-      "Tank",
-      "Olaf",
-      "Frank",
-      "Ken",
-      "Bubbles",
-      "Cally",
-      "Lionel",
-      "Leopold",
-      "Lopez",
-      "Shep",
-      "Klaus",
-      "Chops",
-      "Clay",
-      "Iggly",
-    ],
-  };
-
   const { loading, error, data, fetchMore } = useVillagersSearchQuery({
     variables: {
       start: 30,
@@ -65,13 +40,13 @@ const VillagerIndex: NextPage = (props) => {
         starSign: StarSign[starSign] || undefined,
         text: searchText || undefined,
       },
-      villageState,
     },
   });
 
   if (error) {
-    throw new Error("Error searching for villagers " + error);
+    throw error;
   }
+
   return (
     <>
       <Head>
@@ -256,19 +231,7 @@ const VillagerCard: React.FC<{
             </span>
           </span>
 
-          <span className="tooltip">
-            <span className="whitespace-no-wrap">
-              <span className="mr-1">⛺</span>
-              <span className="text-sm">
-                {villager.campsiteProbability
-                  ? `${(villager.campsiteProbability * 100).toFixed(2)}%`
-                  : "N/A"}
-              </span>
-            </span>
-            <span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
-              <span>Probability of spawn in campsite</span>
-            </span>
-          </span>
+          <CampsiteProbability villagerId={villager.id}></CampsiteProbability>
         </p>
       </div>
     </li>

@@ -81,7 +81,8 @@ export function createConnectionFromFullNodeEdgeList<TEntity extends Node>(
 
   const pageInfo: any = {
     hasPreviousPage: startSliceIndex !== 0,
-    hasNextPage: endSliceIndex < allPossibleEdges.length - 1,
+    hasNextPage: endSliceIndex < allPossibleEdges.length,
+    count: allPossibleEdges.length,
   };
 
   if (edges.length > 0) {

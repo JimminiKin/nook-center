@@ -65,6 +65,7 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean'];
   startCursor?: Maybe<Scalars['String']>;
   endCursor?: Maybe<Scalars['String']>;
+  count: Scalars['Int'];
 };
 
 export enum Personality {
@@ -382,6 +383,7 @@ export type PageInfoResolvers<ContextType = any, ParentType extends ResolversPar
   hasPreviousPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   startCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   endCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 

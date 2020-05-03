@@ -2,7 +2,6 @@ query villagersSearch(
   $search: VillagerSearchInput!
   $start: Int = 20
   $after: String
-  $villageState: VillageStateInput
 ) {
   villagers(search: $search, start: $start, after: $after)
     @connection(key: "villagers", filter: ["search"]) {
@@ -27,7 +26,6 @@ query villagersSearch(
         saying
         birthday
         randomIslandSpawnProbability
-        campsiteProbability(villageState: $villageState)
       }
     }
     pageInfo {
@@ -35,6 +33,7 @@ query villagersSearch(
       hasPreviousPage
       startCursor
       endCursor
+      count
     }
   }
 }

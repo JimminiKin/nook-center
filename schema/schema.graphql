@@ -18,6 +18,7 @@ type PageInfo {
   hasPreviousPage: Boolean!
   startCursor: String
   endCursor: String
+  count: Int!
 }
 
 input VillageStateInput {

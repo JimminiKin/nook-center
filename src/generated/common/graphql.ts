@@ -62,6 +62,7 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean'];
   startCursor?: Maybe<Scalars['String']>;
   endCursor?: Maybe<Scalars['String']>;
+  count: Scalars['Int'];
 };
 
 export enum Personality {
