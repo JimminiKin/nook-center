@@ -14,6 +14,10 @@ const CampsiteProbability = dynamic(
   () => import("@components/Villager/CampsiteProbability"),
   { ssr: false }
 );
+const VillagerStateToggles = dynamic(
+  () => import("@components/Villager/VillagerStateToggles"),
+  { ssr: false }
+);
 
 import {
   useVillagersSearchQuery,
@@ -136,7 +140,7 @@ const VillagerIndex: NextPage = (props) => {
       ) : (
         <InfiniteScroller
           element="ul"
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"
           hasMore={
             data && data.villagers ? data.villagers.pageInfo.hasNextPage : false
           }
@@ -201,7 +205,7 @@ const VillagerCard: React.FC<{
           />
         </a>
       </Link>
-      <div className="w-2/3 pl-4">
+      <div className="w-1/3 pl-4">
         <Link
           href="/villager/[id]"
           as={`/villager/${villager.id}`}
@@ -244,9 +248,13 @@ const VillagerCard: React.FC<{
               <span>Probability of spawn on random island</span>
             </span>
           </span>
-
+        </p>
+        <p>
           <CampsiteProbability villagerId={villager.id}></CampsiteProbability>
         </p>
+      </div>
+      <div className="w-1/3 pl-4">
+        <VillagerStateToggles villagerId={villager.id}></VillagerStateToggles>
       </div>
     </li>
   );

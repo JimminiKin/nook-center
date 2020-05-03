@@ -1,5 +1,4 @@
-import { Gender } from "@gen/common/graphql";
-import { StarSign } from "@gen/server/graphql";
+import { Gender, StarSign } from "@gen/common/graphql";
 
 export const ucfirst = (value: string): string => {
   return value.charAt(0).toUpperCase() + value.toLowerCase().slice(1);

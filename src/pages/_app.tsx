@@ -4,6 +4,10 @@ import Head from "next/head";
 import HeadLinks from "@components/App/HeadLinks";
 import Header from "@components/App/Header";
 
+import CurrentInhabitantsProvider from "@components/contexts/CurrentInhabitantsContext";
+import PastInhabitantsProdiver from "@components/contexts/PastInhabitantsContext";
+import PastCampersProvider from "@components/contexts/PastCampersContext";
+
 import "../css/styles.css";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
@@ -15,7 +19,13 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
       <Header />
       <main>
-        <Component {...pageProps} />
+        <PastCampersProvider>
+          <PastInhabitantsProdiver>
+            <CurrentInhabitantsProvider>
+              <Component {...pageProps} />
+            </CurrentInhabitantsProvider>
+          </PastInhabitantsProdiver>
+        </PastCampersProvider>
       </main>
     </>
   );
