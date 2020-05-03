@@ -13,9 +13,9 @@ const CampsiteProbability: React.FC<{
       "Flora",
       "Peck",
       "Fauna",
-      "Dizzy",
       "Tom",
       "Judy",
+      "Snooty",
     ],
     pastVillagers: [
       "Reneigh",
@@ -24,7 +24,7 @@ const CampsiteProbability: React.FC<{
       "Chadder",
       "Alli",
       "Lyman",
-      "Snooty",
+      "Dizzy",
     ],
     pastCampers: [
       "Tank",
@@ -45,6 +45,12 @@ const CampsiteProbability: React.FC<{
       "Hans",
       "Pudge",
       "Henry",
+      "Graham",
+      "Marshal",
+      "Rodney",
+      "Dobie",
+      "Keaton",
+      "Cousteau",
     ],
   };
 

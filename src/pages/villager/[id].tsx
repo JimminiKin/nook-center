@@ -3,11 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { withApollo, createApolloClient } from "@apollo/client";
 
-import {
-  useVillagerQuery,
-  VillagerQuery,
-  VillagerDocument,
-} from "@query/villager";
+import { useVillagerQuery, VillagerDocument } from "@query/villager";
 
 import { Gender, Personality, StarSign, Species } from "@gen/common/graphql";
 import { NextPage } from "next";
@@ -47,18 +43,20 @@ const Villager: NextPage = () => {
     throw new Error("Error searching for villagers");
   }
 
+  if (loading) {
+    return (
+      <div className="items-center flex justify-around p-56">
+        <h4>Loading ...</h4>
+      </div>
+    );
+  }
+
   return (
     <>
       <Head>
         <title>{data.villager.name} - Villager - Nook Center</title>
       </Head>
-      {loading ? (
-        <div className="items-center flex justify-around p-56">
-          <h4>Loading ...</h4>
-        </div>
-      ) : (
-        <pre>{JSON.stringify(data.villager)}</pre>
-      )}
+      <pre>{JSON.stringify(data.villager)}</pre>
     </>
   );
 };

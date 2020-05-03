@@ -8,7 +8,7 @@ const Header: React.FC<{
   name: string;
 }> = ({ onClick, target, name }) => {
   return (
-    <Link href={target}>
+    <Link href={target} prefetch={false}>
       <a
         className="sm:mt-0 mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-green-900"
         onClick={onClick}

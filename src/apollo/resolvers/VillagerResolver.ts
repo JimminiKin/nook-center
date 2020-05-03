@@ -248,8 +248,19 @@ const VillagerResolver: Resolvers<any> = {
       }
 
       const personnality = getPersonality(getOne(parent.id).personality);
-      if (currentVillagersPersonalityCount[personnality] === 0) {
-        return 0.6 * (1 / filteredVillagersPersonalityCount[personnality]);
+
+      const emptyPersonnalitiesInVillage = Object.values(Personality).filter(
+        (pers) => {
+          return currentVillagersPersonalityCount[pers] === 0;
+        }
+      );
+
+      if (emptyPersonnalitiesInVillage.includes(personnality)) {
+        return (
+          0.6 *
+          (1 / emptyPersonnalitiesInVillage.length) *
+          (1 / filteredVillagersPersonalityCount[personnality])
+        );
       }
 
       return (

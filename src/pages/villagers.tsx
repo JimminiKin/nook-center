@@ -54,6 +54,7 @@ const VillagerIndex: NextPage = (props) => {
       </Head>
       <div className="p-4 lg:flex lg:justify-evenly">
         <input
+          aria-label="Text Search"
           type="text"
           className="inline-block p-2 px-3 rounded-lg m-4"
           value={searchText || ""}
@@ -62,6 +63,7 @@ const VillagerIndex: NextPage = (props) => {
         />
 
         <select
+          aria-label="Select Gender"
           value={gender || ""}
           className="inline-block p-2 m-4"
           onChange={(event) => setGender(event.target.value)}
@@ -76,6 +78,7 @@ const VillagerIndex: NextPage = (props) => {
           })}
         </select>
         <select
+          aria-label="Select Species"
           value={species || ""}
           className="inline-block p-2 m-4"
           onChange={(event) => setSpecies(event.target.value || "")}
@@ -88,6 +91,7 @@ const VillagerIndex: NextPage = (props) => {
           ))}
         </select>
         <select
+          aria-label="Select Star Sign"
           value={starSign || ""}
           className="inline-block p-2 m-4"
           onChange={(event) => setStarSign(event.target.value || "")}
@@ -100,6 +104,7 @@ const VillagerIndex: NextPage = (props) => {
           ))}
         </select>
         <select
+          aria-label="Select Personality"
           value={personality || ""}
           className="inline-block p-2 m-4"
           onChange={(event) => setPersonality(event.target.value || "")}
@@ -182,23 +187,31 @@ const VillagerCard: React.FC<{
 }> = ({ villager }) => {
   return (
     <li className="bg-white rounded-lg overflow-hidden border-gray-600 items-center flex justify-between p-4">
-      <Link href="/villager/[id]" as={`/villager/${villager.id}`}>
-        <div className="w-1/3 max-h-full cursor-pointer">
-          <a>
-            <img
-              loading="lazy"
-              className="block h-full w-full"
-              src={villager.picture.medium}
-              alt={`Picture of ${villager.name}`}
-            />
-          </a>
-        </div>
+      <Link
+        href="/villager/[id]"
+        as={`/villager/${villager.id}`}
+        prefetch={false}
+      >
+        <a className="block w-1/3 max-h-full cursor-pointer">
+          <img
+            loading="lazy"
+            className="block h-full w-full"
+            src={villager.picture.medium}
+            alt={`Picture of ${villager.name}`}
+          />
+        </a>
       </Link>
       <div className="w-2/3 pl-4">
-        <Link href="/villager/[id]" as={`/villager/${villager.id}`}>
-          <h4 className="text-lg text-green-900 font-semibold cursor-pointer">
-            {villager.name}
-          </h4>
+        <Link
+          href="/villager/[id]"
+          as={`/villager/${villager.id}`}
+          prefetch={false}
+        >
+          <a>
+            <h4 className="text-lg text-green-900 font-semibold">
+              {villager.name}
+            </h4>
+          </a>
         </Link>
         <p>
           {ucfirst(villager.species)} |{" "}
