@@ -51,6 +51,8 @@ const CampsiteProbability: React.FC<{
       "Dobie",
       "Keaton",
       "Cousteau",
+      "Quillson",
+      "Kidd",
     ],
   };
 
