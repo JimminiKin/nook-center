@@ -24,7 +24,7 @@ const InhabitantsProvider: React.FC = (props) => {
   ] = useLocalStorage("currentInhabitants", [
     "Filbert",
     "Octavian",
-    "Maddie",
+    "Julian",
     "Phoebe",
     "Flora",
     "Peck",

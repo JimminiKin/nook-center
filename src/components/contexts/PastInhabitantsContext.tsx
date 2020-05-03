@@ -26,6 +26,7 @@ const InhabitantsProvider: React.FC = (props) => {
     "Alli",
     "Lyman",
     "Dizzy",
+    "Maddie",
   ]);
 
   const addPastInhabitant: PastInhabitantsContextType["addPastInhabitant"] = (

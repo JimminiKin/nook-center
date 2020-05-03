@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import InfiniteScroller from "react-infinite-scroller";
 
-import { withApollo } from "@apollo/client";
+import { withApollo, createApolloClient } from "@apollo/client";
 
 import { ucfirst, getGenderEmoji, getZodiacEmoji } from "@modules/utils";
 // import CampsiteProbability from "@components/Villager/CampsiteProbability";
@@ -22,10 +22,32 @@ const VillagerStateToggles = dynamic(
 import {
   useVillagersSearchQuery,
   VillagersSearchQuery,
+  VillagersSearchDocument,
 } from "@query/villagersSearch";
 
 import { Gender, Personality, StarSign, Species } from "@gen/common/graphql";
-import { VillageStateInput } from "@gen/server/graphql";
+
+export const getStaticProps = async ({ params }) => {
+  const apolloClient = createApolloClient();
+  await apolloClient.query({
+    query: VillagersSearchDocument,
+    variables: {
+      start: 30,
+      search: {
+        gender: undefined,
+        personality: undefined,
+        species: undefined,
+        starSign: undefined,
+        text: undefined,
+      },
+    },
+  });
+  return {
+    props: {
+      apolloState: apolloClient.cache.extract(),
+    },
+  };
+};
 
 const VillagerIndex: NextPage = (props) => {
   const [gender, setGender] = React.useState<string>("");
@@ -261,4 +283,4 @@ const VillagerCard: React.FC<{
   );
 };
 
-export default withApollo(VillagerIndex);
+export default withApollo(VillagerIndex, { ssr: false });
