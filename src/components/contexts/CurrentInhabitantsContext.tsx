@@ -27,6 +27,7 @@ const InhabitantsProvider: React.FC = (props) => {
 		'Fauna',
 		'Tom',
 		'Judy',
+		'Marina',
 		'Julian',
 	]);
 

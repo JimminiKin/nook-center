@@ -1,6 +1,8 @@
 import React from 'react';
 
 const useLocalStorage = <TStored>(key: string, initialValue: TStored): [TStored, (value: TStored) => void] => {
+	key = `v3-${key}`;
+
 	if (typeof window === 'undefined') {
 		return [
 			initialValue,

@@ -17,7 +17,7 @@ export const PastInhabitantsContext = React.createContext<PastInhabitantsContext
 });
 
 const InhabitantsProvider: React.FC = (props) => {
-	const [pastInhabitants, setInhabitants] = useLocalStorage('v2pastInhabitants', [
+	const [pastInhabitants, setInhabitants] = useLocalStorage('pastInhabitants', [
 		'Reneigh',
 		'Louie',
 		'Huck',

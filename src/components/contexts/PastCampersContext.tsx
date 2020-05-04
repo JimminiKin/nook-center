@@ -17,7 +17,7 @@ export const PastCampersContext = React.createContext<PastCampersContextType>({
 });
 
 const PastCampersProvider: React.FC = (props) => {
-	const [pastCampers, setPastCampers] = useLocalStorage('v2pastCampers', [
+	const [pastCampers, setPastCampers] = useLocalStorage('pastCampers', [
 		'Tank',
 		'Olaf',
 		'Frank',
