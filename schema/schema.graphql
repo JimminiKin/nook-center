@@ -61,6 +61,7 @@ type Picture {
 }
 
 type VillagerNameTranslations {
+	english: String
 	japanese: String
 	japaneseExplanation: String
 	spanish: String

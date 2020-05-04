@@ -197,6 +197,7 @@ export type VillagerCampsiteProbabilityArgs = {
 
 export type VillagerNameTranslations = {
 	__typename?: 'VillagerNameTranslations';
+	english?: Maybe<Scalars['String']>;
 	japanese?: Maybe<Scalars['String']>;
 	japaneseExplanation?: Maybe<Scalars['String']>;
 	spanish?: Maybe<Scalars['String']>;

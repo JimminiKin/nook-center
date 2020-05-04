@@ -8,6 +8,7 @@ query villager($villagerId: ID!) {
 			full
 		}
 		translations {
+			english
 			japanese
 			japaneseExplanation
 			spanish

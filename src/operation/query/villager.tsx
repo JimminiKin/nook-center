@@ -26,6 +26,7 @@ export type VillagerQuery = {__typename: 'Query'} & {
 				picture?: Types.Maybe<{__typename: 'Picture'} & Pick<Types.Picture, 'medium' | 'full'>>;
 				translations: {__typename: 'VillagerNameTranslations'} & Pick<
 					Types.VillagerNameTranslations,
+					| 'english'
 					| 'japanese'
 					| 'japaneseExplanation'
 					| 'spanish'
@@ -53,6 +54,7 @@ export const VillagerDocument = gql`
 				full
 			}
 			translations {
+				english
 				japanese
 				japaneseExplanation
 				spanish

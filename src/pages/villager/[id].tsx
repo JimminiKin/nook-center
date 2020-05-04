@@ -60,7 +60,7 @@ const Villager: NextPage = () => {
 				<title>{villager.name} - Villager - Nook Center</title>
 			</Head>
 			<div className="content-center flex flex-col justify-center">
-				<h1 className="text-green-900 font-bold text-5xl text-center my-8">{villager.id}</h1>
+				<h1 className="text-green-900 font-bold text-5xl text-center my-8">{villager.name}</h1>
 				<img
 					loading="lazy"
 					className="block h-64"
@@ -105,6 +105,10 @@ const Villager: NextPage = () => {
 				</dl>
 				<h2 className="text-green-900 font-bold text-xl  px-8 pt-8 pb-4">Names in other languages :</h2>
 				<ul className="px-8 mb-8">
+					<li>
+						<span className="p-2">🇬🇧</span>
+						<span>{villager.translations.english}</span>
+					</li>
 					<li>
 						<span className="p-2">🇫🇷</span>
 						<span>{villager.translations.french}</span>

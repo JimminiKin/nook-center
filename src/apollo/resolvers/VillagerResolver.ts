@@ -129,7 +129,8 @@ const VillagerResolver: Resolvers<any> = {
 		},
 
 		translations(parent) {
-			return getOne(parent.id).translations;
+			const villager = getOne(parent.id);
+			return {...villager.translations, english: villager.name};
 		},
 
 		birthday(parent) {

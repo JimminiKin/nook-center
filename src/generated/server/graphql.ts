@@ -200,6 +200,7 @@ export type VillagerCampsiteProbabilityArgs = {
 
 export type VillagerNameTranslations = {
 	__typename?: 'VillagerNameTranslations';
+	english?: Maybe<Scalars['String']>;
 	japanese?: Maybe<Scalars['String']>;
 	japaneseExplanation?: Maybe<Scalars['String']>;
 	spanish?: Maybe<Scalars['String']>;
@@ -487,6 +488,7 @@ export type VillagerNameTranslationsResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['VillagerNameTranslations'] = ResolversParentTypes['VillagerNameTranslations']
 > = ResolversObject<{
+	english?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 	japanese?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 	japaneseExplanation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 	spanish?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
