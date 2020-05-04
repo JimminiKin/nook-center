@@ -36,6 +36,6 @@ generates:
     config:
       defaultMapper: DeepPartial<{T}>
       useIndexSignature: true
-  ./graphql.schema.json:
+  src/generated/graphql.schema.json:
     plugins:
       - 'introspection'

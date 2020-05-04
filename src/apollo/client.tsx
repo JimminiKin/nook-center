@@ -137,7 +137,6 @@ export function createApolloClient(initialState = {}) {
 		cache,
 	});
 }
-IntrospectionFragmentMatcher;
 
 function createIsomorphLink() {
 	if (typeof window === 'undefined') {
