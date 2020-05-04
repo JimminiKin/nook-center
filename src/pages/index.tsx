@@ -21,13 +21,14 @@ const Index = () => {
 			</p>
 			<p className="p-4 text-xl">
 				All informations used to create this tool was provided by{' '}
-				<a href="https://www.reddit.com/user/DrJaysAnatomy/" target="_blank" className="font-bold">
+				<a href="https://www.reddit.com/user/DrJaysAnatomy/" target="_blank" rel="noopener" className="font-bold">
 					DrJaysAnatomy
 				</a>{' '}
 				and comes from this{' '}
 				<a
 					href="https://docs.google.com/document/d/1c8rsKWWtwsOo_JOxwO-lVRx2MUhc-bcdZg1mhXgtRPg/edit#"
 					target="_blank"
+					rel="noopener"
 					className="font-bold"
 				>
 					doc

@@ -24,6 +24,7 @@ const Header: React.FC = () => {
 					<button
 						type="button"
 						className="block text-gray-300 hover:text-white focus:text-white sm:hidden"
+						aria-label="home"
 						onClick={() => {
 							setOpenMenu(!isMenuOpen);
 						}}

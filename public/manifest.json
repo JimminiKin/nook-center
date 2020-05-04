@@ -1,5 +1,7 @@
 {
 	"name": "App",
+	"theme_color": "#2f855a",
+	"background_color": "#2f855a",
 	"icons": [
 		{
 			"src": "/icons/android-icon-36x36.png",
@@ -34,6 +36,12 @@
 		{
 			"src": "/icons/android-icon-192x192.png",
 			"sizes": "192x192",
+			"type": "image/png",
+			"density": "4.0"
+		},
+		{
+			"src": "/icons/icon-512x512.png",
+			"sizes": "512x512",
 			"type": "image/png",
 			"density": "4.0"
 		}

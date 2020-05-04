@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {AppProps} from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
-import HeadLinks from '@components/App/HeadLinks';
 import Header from '@components/App/Header';
 
 import withGA from 'next-ga';
@@ -18,7 +17,6 @@ const App: React.FC<AppProps> = ({Component, pageProps}) => {
 		<>
 			<Head>
 				<title>Nook Center</title>
-				<HeadLinks></HeadLinks>
 			</Head>
 			<Header />
 			<main>

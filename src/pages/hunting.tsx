@@ -53,11 +53,16 @@ const Hunting: NextPage = (props) => {
 						To have villagers spawn on a mystery island, you have to have an empty spot on your island, or a spot for
 						sale. If you need to get rid of a current villager beforehand, you'll need to ignore them fo a while (at
 						least 15 days apparently). For more information on how to kick a villager, you can watch{' '}
-						<a href="https://www.youtube.com/watch?v=AasUEUGerZA" target="_blank" className="font-bold">
+						<a href="https://www.youtube.com/watch?v=AasUEUGerZA" target="_blank" rel="noopener" className="font-bold">
 							this video
 						</a>{' '}
 						from{' '}
-						<a href="https://www.youtube.com/channel/UCXbYdeldt9XqrXBB1kl00Mg" target="_blank" className="font-bold">
+						<a
+							href="https://www.youtube.com/channel/UCXbYdeldt9XqrXBB1kl00Mg"
+							target="_blank"
+							rel="noopener"
+							className="font-bold"
+						>
 							TagBackTV
 						</a>
 						.
@@ -115,23 +120,29 @@ const Hunting: NextPage = (props) => {
 					<p className="p-4 text-xl">// TODO More info =).</p>
 					<p className="p-4 text-xl">
 						For more information about the specifics of the method{' '}
-						<a href="https://www.youtube.com/watch?v=b_Veo5QayUI" target="_blank" className="font-bold">
+						<a href="https://www.youtube.com/watch?v=b_Veo5QayUI" target="_blank" rel="noopener" className="font-bold">
 							this video
 						</a>{' '}
 						from{' '}
-						<a href="https://www.youtube.com/channel/UCXbYdeldt9XqrXBB1kl00Mg" target="_blank" className="font-bold">
+						<a
+							href="https://www.youtube.com/channel/UCXbYdeldt9XqrXBB1kl00Mg"
+							target="_blank"
+							rel="noopener"
+							className="font-bold"
+						>
 							TagBackTV
 						</a>{' '}
 						and read{' '}
 						<a
 							href="https://docs.google.com/document/d/1c8rsKWWtwsOo_JOxwO-lVRx2MUhc-bcdZg1mhXgtRPg/edit#"
 							target="_blank"
+							rel="noopener"
 							className="font-bold"
 						>
 							this amazing doc
 						</a>{' '}
 						by{' '}
-						<a href="https://www.reddit.com/user/DrJaysAnatomy/" target="_blank" className="font-bold">
+						<a href="https://www.reddit.com/user/DrJaysAnatomy/" target="_blank" rel="noopener" className="font-bold">
 							DrJaysAnatomy
 						</a>{' '}
 						which is the source of all those informations about probabilties.
