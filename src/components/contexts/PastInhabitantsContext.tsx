@@ -1,6 +1,7 @@
 import React from 'react';
 import {Scalars} from '@gen/common/graphql';
 
+import {unique} from '@modules/utils';
 import useLocalStorage from '@components/hooks/useLocalStorage';
 
 export interface PastInhabitantsContextType {
@@ -29,7 +30,7 @@ const InhabitantsProvider: React.FC = (props) => {
 	]);
 
 	const addPastInhabitant: PastInhabitantsContextType['addPastInhabitant'] = (villagerId) => {
-		setInhabitants(pastInhabitants.concat([villagerId]));
+		setInhabitants(unique(pastInhabitants.concat([villagerId])));
 	};
 
 	const removePastInhabitant: PastInhabitantsContextType['removePastInhabitant'] = (villagerId) => {

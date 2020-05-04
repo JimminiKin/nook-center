@@ -1,0 +1,15 @@
+{
+	"__schema": {
+		"types": [
+			{
+				"kind": "INTERFACE",
+				"name": "Node",
+				"possibleTypes": [
+					{
+						"name": "Villager"
+					}
+				]
+			}
+		]
+	}
+}

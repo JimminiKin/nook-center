@@ -1,29 +1,30 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@modules/*": ["src/modules/*"],
-      "@apollo/*": ["src/apollo/*"],
-      "@data/*": ["data/*"],
-      "@components/*": ["src/components/*"],
-      "@gen/*": ["src/generated/*"],
-      "@query/*": ["src/operation/query/*"],
-      "@fragment/*": ["src/operation/fragment/*"]
-    }
-  },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"downlevelIteration": true,
+		"jsx": "preserve",
+		"baseUrl": ".",
+		"paths": {
+			"@modules/*": ["src/modules/*"],
+			"@apollo/*": ["src/apollo/*"],
+			"@data/*": ["data/*"],
+			"@components/*": ["src/components/*"],
+			"@gen/*": ["src/generated/*"],
+			"@query/*": ["src/operation/query/*"],
+			"@fragment/*": ["src/operation/fragment/*"]
+		}
+	},
+	"exclude": ["node_modules"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -4,6 +4,7 @@ query villagersSearch($search: VillagerSearchInput!, $start: Int = 20, $after: S
 		edges {
 			cursor
 			node {
+				id
 				...VillagerCard
 			}
 		}

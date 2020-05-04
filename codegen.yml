@@ -4,6 +4,9 @@ hooks:
   afterOneFileWrite:
     - prettier --write
 generates:
+  src/generated/fragmentTypes.json:
+    plugins:
+      - fragment-matcher
   src/generated/graphql.d.ts:
     plugins:
       - 'typescript-graphql-files-modules'

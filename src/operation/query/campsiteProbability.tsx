@@ -10,12 +10,13 @@ export type CampsiteProbabilityQueryVariables = {
 };
 
 export type CampsiteProbabilityQuery = {__typename: 'Query'} & {
-	villager?: Types.Maybe<{__typename: 'Villager'} & Pick<Types.Villager, 'campsiteProbability'>>;
+	villager?: Types.Maybe<{__typename: 'Villager'} & Pick<Types.Villager, 'id' | 'campsiteProbability'>>;
 };
 
 export const CampsiteProbabilityDocument = gql`
 	query campsiteProbability($villagerId: ID!, $villageState: VillageStateInput) {
 		villager(villagerId: $villagerId) {
+			id
 			campsiteProbability(villageState: $villageState)
 		}
 	}

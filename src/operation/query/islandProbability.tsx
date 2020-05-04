@@ -10,12 +10,13 @@ export type IslandProbabilityQueryVariables = {
 };
 
 export type IslandProbabilityQuery = {__typename: 'Query'} & {
-	villager?: Types.Maybe<{__typename: 'Villager'} & Pick<Types.Villager, 'islandProbability'>>;
+	villager?: Types.Maybe<{__typename: 'Villager'} & Pick<Types.Villager, 'id' | 'islandProbability'>>;
 };
 
 export const IslandProbabilityDocument = gql`
 	query islandProbability($villagerId: ID!, $villageState: VillageStateInput) {
 		villager(villagerId: $villagerId) {
+			id
 			islandProbability(villageState: $villageState)
 		}
 	}

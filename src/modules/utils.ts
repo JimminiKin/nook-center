@@ -45,3 +45,7 @@ export const getZodiacEmoji = (zodiac: StarSign) => {
 			return '🤷';
 	}
 };
+
+export const unique = (array: string[]): string[] => {
+	return [...new Set(array)];
+};

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Scalars} from '@gen/common/graphql';
 
+import {unique} from '@modules/utils';
+
 import useLocalStorage from '@components/hooks/useLocalStorage';
 
 export interface CurrentInhabitantsContextType {
@@ -19,7 +21,6 @@ const InhabitantsProvider: React.FC = (props) => {
 	const [currentInhabitants, setInhabitants] = useLocalStorage('currentInhabitants', [
 		'Filbert',
 		'Octavian',
-		'Julian',
 		'Phoebe',
 		'Flora',
 		'Peck',
@@ -30,7 +31,7 @@ const InhabitantsProvider: React.FC = (props) => {
 	]);
 
 	const addCurrentInhabitant: CurrentInhabitantsContextType['addCurrentInhabitant'] = (villagerId) => {
-		setInhabitants(currentInhabitants.concat([villagerId]));
+		setInhabitants(unique(currentInhabitants.concat([villagerId])));
 	};
 
 	const removeCurrentInhabitant: CurrentInhabitantsContextType['removeCurrentInhabitant'] = (villagerId) => {

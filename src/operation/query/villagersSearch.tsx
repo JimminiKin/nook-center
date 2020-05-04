@@ -16,7 +16,7 @@ export type VillagersSearchQuery = {__typename: 'Query'} & {
 	villagers: {__typename: 'VillagersResultConnection'} & {
 		edges: Array<
 			{__typename: 'VillagersResultEdge'} & Pick<Types.VillagersResultEdge, 'cursor'> & {
-					node: {__typename: 'Villager'} & VillagerCardFragment;
+					node: {__typename: 'Villager'} & Pick<Types.Villager, 'id'> & VillagerCardFragment;
 				}
 		>;
 		pageInfo: {__typename: 'PageInfo'} & Pick<
@@ -33,6 +33,7 @@ export const VillagersSearchDocument = gql`
 			edges {
 				cursor
 				node {
+					id
 					...VillagerCard
 				}
 			}

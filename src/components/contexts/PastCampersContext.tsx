@@ -1,6 +1,7 @@
 import React from 'react';
 import {Scalars} from '@gen/common/graphql';
 
+import {unique} from '@modules/utils';
 import useLocalStorage from '@components/hooks/useLocalStorage';
 
 export interface PastCampersContextType {
@@ -55,7 +56,7 @@ const PastCampersProvider: React.FC = (props) => {
 	]);
 
 	const addPastCamper: PastCampersContextType['addPastCamper'] = (villagerId) => {
-		setPastCampers(pastCampers.concat([villagerId]));
+		setPastCampers(unique(pastCampers.concat([villagerId])));
 	};
 
 	const removePastCamper: PastCampersContextType['removePastCamper'] = (villagerId) => {
