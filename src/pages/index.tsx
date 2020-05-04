@@ -34,6 +34,7 @@ const Index = () => {
 					doc
 				</a>
 			</p>
+			<p className="p-4 text-xl">All data you input on this website is store only locally, on your current browser.</p>
 			<p className="p-4 text-xl">Checklist of potential future features : </p>
 			<ul className="p-4 py-2 mx-8 -my-2 text-xl list-disc">
 				<li>Localization</li>

@@ -27,10 +27,10 @@ const VillagerCard: React.FC<{
 						/>
 					</a>
 				</Link>
-				<div className="w-1/2 pl-4">
+				<div className="w-1/2 pl-4 flex flex-col justify-evenly h-48">
 					<Link href="/villager/[id]" as={`/villager/${villager.id}`} prefetch={false}>
 						<a>
-							<h4 className="text-lg text-green-900 font-semibold">{villager.name}</h4>
+							<h4 className="text-lg text-green-900 font-semibold pb-2">{villager.name}</h4>
 						</a>
 					</Link>
 					<p>
