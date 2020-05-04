@@ -19,6 +19,20 @@ const Index = () => {
 				</Link>{' '}
 				page
 			</p>
+			<p className="p-4 text-xl">
+				All informations used to create this tool was provided by{' '}
+				<a href="https://www.reddit.com/user/DrJaysAnatomy/" target="_blank" className="font-bold">
+					DrJaysAnatomy
+				</a>{' '}
+				and comes from this{' '}
+				<a
+					href="https://docs.google.com/document/d/1c8rsKWWtwsOo_JOxwO-lVRx2MUhc-bcdZg1mhXgtRPg/edit#"
+					target="_blank"
+					className="font-bold"
+				>
+					doc
+				</a>
+			</p>
 			<p className="p-4 text-xl">Checklist of potential future features : </p>
 			<ul className="p-4 py-2 mx-8 -my-2 text-xl list-disc">
 				<li>Localization</li>
