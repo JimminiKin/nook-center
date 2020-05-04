@@ -1,7 +1,7 @@
 import {ApolloServer} from 'apollo-server-micro';
 import schema from '@apollo/schema';
 
-const apolloServer = new ApolloServer({schema});
+const apolloServer = new ApolloServer({schema, playground: true});
 
 export const config = {
 	api: {

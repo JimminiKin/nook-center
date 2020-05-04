@@ -4,6 +4,9 @@ import {createConnectionFromFullNodeEdgeList} from '@apollo/resolvers/Common';
 import {Species, Personality} from '@gen/common/graphql';
 
 import data from '@data/villagers.json';
+import imagesThumb from '../images/thumb';
+import imagesMedium from '../images/medium';
+import imagesFull from '../images/full';
 
 const getAllIds = () => {
 	return data.map((villager) => villager.id);
@@ -159,7 +162,11 @@ const VillagerResolver: Resolvers<any> = {
 		},
 
 		picture(parent) {
-			return getOne(parent.id).image;
+			return {
+				full: imagesFull[parent.id.toLowerCase()],
+				thumb: imagesThumb[parent.id.toLowerCase()],
+				medium: imagesMedium[parent.id.toLowerCase()],
+			};
 		},
 
 		islandProbability(parent, args) {

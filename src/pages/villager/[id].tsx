@@ -63,7 +63,7 @@ const Villager: NextPage = () => {
 				<h1 className="text-green-900 font-bold text-5xl text-center my-8">{villager.name}</h1>
 				<img
 					loading="lazy"
-					className="block h-64"
+					className="block p-8"
 					style={{objectFit: 'contain'}}
 					src={villager.picture.full}
 					alt={`Picture of ${villager.name}`}
