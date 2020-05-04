@@ -67,7 +67,7 @@ const VillagerStateToggles: React.FC<{
 							removePastInhabitant(villagerId);
 						}}
 					>
-						<span className="mr-1">💨 ➖</span>
+						<span className="mr-1">📦 ➖</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8  mt-8">
 						<span>Unmark as past island inhabitant</span>
@@ -82,7 +82,7 @@ const VillagerStateToggles: React.FC<{
 							addPastInhabitant(villagerId);
 						}}
 					>
-						<span className="mr-1">💨 ➕</span>
+						<span className="mr-1">📦 ➕</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8  mt-8">
 						<span>Mark as past island inhabitant</span>

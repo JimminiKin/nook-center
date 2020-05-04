@@ -40,20 +40,20 @@ const MyVillagers: React.FC = () => {
 	const {pastCampers} = React.useContext(PastCampersContext);
 
 	return (
-		<div className="text-center py-4">
-			<h2 className="text-green-800 font-bold text-xl">Current Inhabitants</h2>
+		<div className="p-4">
+			<h2 className="text-green-900 font-bold text-4xl p-8 bg-green-500 text-center rounded-lg">Current Inhabitants</h2>
 			<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
 				{currentInhabitants.map((inhabitantId) => (
 					<LoadedVillagerCard key={inhabitantId} villagerId={inhabitantId} />
 				))}
 			</ul>
-			<h2 className="text-green-800 font-bold text-xl">Past Inhabitants</h2>
+			<h2 className="text-green-900 font-bold text-4xl p-8 bg-green-500 text-center rounded-lg">Past Inhabitants</h2>
 			<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
 				{pastInhabitants.map((pastInhabitantId) => (
 					<LoadedVillagerCard key={pastInhabitantId} villagerId={pastInhabitantId} />
 				))}
 			</ul>
-			<h2 className="text-green-800 font-bold text-xl">Past Campers</h2>
+			<h2 className="text-green-900 font-bold text-4xl p-8 bg-green-500 text-center rounded-lg">Past Campers</h2>
 			<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
 				{pastCampers.map((pastCamperId) => (
 					<LoadedVillagerCard key={pastCamperId} villagerId={pastCamperId} />

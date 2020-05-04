@@ -245,17 +245,17 @@ const VillagerResolver: Resolvers<any> = {
 				return 0;
 			}
 
-			const personnality = getPersonality(getOne(parent.id).personality);
+			const personality = getPersonality(getOne(parent.id).personality);
 
 			const emptyPersonnalitiesInVillage = Object.values(Personality).filter((pers) => {
 				return currentVillagersPersonalityCount[pers] === 0;
 			});
 
-			if (emptyPersonnalitiesInVillage.includes(personnality)) {
-				return 0.6 * (1 / emptyPersonnalitiesInVillage.length) * (1 / filteredVillagersPersonalityCount[personnality]);
+			if (emptyPersonnalitiesInVillage.includes(personality)) {
+				return 0.6 * (1 / emptyPersonnalitiesInVillage.length) * (1 / filteredVillagersPersonalityCount[personality]);
 			}
 
-			return 0.4 * (1 / (Object.keys(Personality).length - 1)) * (1 / filteredVillagersPersonalityCount[personnality]);
+			return 0.4 * (1 / (Object.keys(Personality).length - 1)) * (1 / filteredVillagersPersonalityCount[personality]);
 		},
 	},
 };

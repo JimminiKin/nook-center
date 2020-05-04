@@ -35,6 +35,7 @@ const Header: React.FC = () => {
 			<nav className={`px-2 pt-2 pb-4 sm:flex sm:p-0 ${isMenuOpen ? 'block' : 'hidden'}`}>
 				<HeaderLink target="/villagers" name="Villagers" onClick={closeMenu} />
 				<HeaderLink target="/my-village" name="My Village" onClick={closeMenu} />
+				<HeaderLink target="/hunting" name="Hunting" onClick={closeMenu} />
 			</nav>
 		</header>
 	);

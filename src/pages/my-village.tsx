@@ -7,7 +7,12 @@ import {withApollo} from '@apollo/client';
 
 const MyVillagers = dynamic(() => import('@components/Villager/MyVillagers'), {ssr: false});
 
-const MyVillageStatus: NextPage = (props) => {
+export const getStaticProps = () => {
+	return {
+		props: {},
+	};
+};
+const MyVillage: NextPage = (props) => {
 	return (
 		<>
 			<Head>
@@ -18,4 +23,4 @@ const MyVillageStatus: NextPage = (props) => {
 	);
 };
 
-export default withApollo(MyVillageStatus, {ssr: false});
+export default withApollo(MyVillage, {ssr: false});
