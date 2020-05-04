@@ -70,45 +70,39 @@ const Villager: NextPage = () => {
 				/>{' '}
 				<h2 className="text-green-900 font-bold text-xl  px-8 pt-8 pb-4">Informations :</h2>
 				<dl className="px-8 text-center">
-					<div className="flex justify-start gap-4">
+					<div className="flex justify-start gap-4 border-b border-t border-green-600 border-opacity-25">
 						<dt className="p-2 whitespace-no-wrap">Species : </dt>
 						<dd className="p-2">{ucfirst(villager.species)}</dd>
 					</div>
-					<hr />
-					<div className="flex justify-start gap-4">
+					<div className="flex justify-start gap-4 border-b border-green-600 border-opacity-25">
 						<dt className="p-2 whitespace-no-wrap">Gender : </dt>
 						<dd className="p-2">
 							{ucfirst(villager.gender)} {getGenderEmoji(villager.gender)}
 						</dd>
 					</div>
-					<hr />
-					<div className="flex justify-start gap-4">
+					<div className="flex justify-start gap-4 border-b border-green-600 border-opacity-25">
 						<dt className="p-2 whitespace-no-wrap">Birthday : </dt>
 						<dd className="p-2">{ucfirst(villager.birthday)}</dd>
 					</div>
-					<hr />
-					<div className="flex justify-start gap-4">
+					<div className="flex justify-start gap-4 border-b border-green-600 border-opacity-25">
 						<dt className="p-2 whitespace-no-wrap">Zodiac Sign : </dt>
 						<dd className="p-2">
 							{ucfirst(villager.starSign)} {getZodiacEmoji(villager.starSign)}
 						</dd>
 					</div>
-					<hr />
-					<div className="flex justify-start gap-4">
+					<div className="flex justify-start gap-4 border-b border-green-600 border-opacity-25">
 						<dt className="p-2 whitespace-no-wrap">Personality : </dt>
 						<dd className="p-2">{ucfirst(villager.personality)}</dd>
 					</div>
-					<hr />
-					<div className="flex justify-start gap-4">
+					<div className="flex justify-start gap-4 border-b border-green-600 border-opacity-25">
 						<dt className="p-2 whitespace-no-wrap">Description : </dt>
 						<dd className="p-2">{villager.description}</dd>
 					</div>
-					<hr />
-					<div className="flex justify-start gap-4">
+					<div className="flex justify-start gap-4 border-b border-green-600 border-opacity-25">
 						<dt className="p-2 whitespace-no-wrap">Saying : </dt>
 						<dd className="p-2">{villager.saying}</dd>
 					</div>
-				</dl>{' '}
+				</dl>
 				<h2 className="text-green-900 font-bold text-xl  px-8 pt-8 pb-4">Names in other languages :</h2>
 				<ul className="px-8 mb-8">
 					<li>
