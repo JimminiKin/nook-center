@@ -43,7 +43,7 @@ const VillagerCard: React.FC<{
 					<p>{ucfirst(villager.personality)}</p>
 					<p>
 						<span className="tooltip">
-							{getZodiacEmoji(villager.starSign)}
+							<span className="text-lg">{getZodiacEmoji(villager.starSign)}</span>
 							<span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">{ucfirst(villager.starSign)}</span>
 						</span>
 						<span className="ml-1 text-sm">{ucfirst(villager.birthday)}</span>

@@ -1,6 +1,9 @@
 import React from 'react';
 
-const useLocalStorage = <TStored>(key: string, initialValue: TStored): [TStored, (value: TStored) => void] => {
+const useLocalStorage = <TStored>(
+	key: string,
+	initialValue: TStored,
+): [TStored, (value: TStored) => void, () => void] => {
 	key = `v3-${key}`;
 
 	if (typeof window === 'undefined') {
@@ -9,6 +12,7 @@ const useLocalStorage = <TStored>(key: string, initialValue: TStored): [TStored,
 			() => {
 				throw new Error('Can not set a value with useLocalStorage on server side');
 			},
+			() => {},
 		];
 	}
 
@@ -43,7 +47,19 @@ const useLocalStorage = <TStored>(key: string, initialValue: TStored): [TStored,
 		}
 	};
 
-	return [storedValue, setValue];
+	const deleteValue = () => {
+		try {
+			// Save empty state
+			setStoredValue(initialValue);
+			// Remove from local storage
+			window.localStorage.removeItem(key);
+		} catch (error) {
+			// A more advanced implementation would handle the error case
+			console.log(error);
+		}
+	};
+
+	return [storedValue, setValue, deleteValue];
 };
 
 export default useLocalStorage;

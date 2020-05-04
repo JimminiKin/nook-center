@@ -2,8 +2,25 @@ query villager($villagerId: ID!) {
 	villager(villagerId: $villagerId) {
 		id
 		name
-		frName
 		gender
+		picture {
+			medium
+			full
+		}
+		translations {
+			japanese
+			japaneseExplanation
+			spanish
+			french
+			german
+			italian
+			dutch
+			korean
+			koreanExplanation
+			russian
+			chinese
+		}
+		birthday
 		nookiPediaPage
 		species
 		personality

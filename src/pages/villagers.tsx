@@ -69,7 +69,7 @@ const VillagerIndex: NextPage = (props) => {
 				<input
 					aria-label="Text Search"
 					type="text"
-					className="inline-block p-2 px-3 rounded-lg m-4"
+					className="inline-block p-2 px-3 rounded m-4"
 					value={searchText || ''}
 					onChange={(event) => setSearchText(event.target.value)}
 					placeholder="Text Search"
@@ -78,7 +78,7 @@ const VillagerIndex: NextPage = (props) => {
 				<select
 					aria-label="Select Gender"
 					value={gender || ''}
-					className="inline-block p-2 m-4"
+					className="inline-block p-2 m-4 rounded"
 					onChange={(event) => setGender(event.target.value)}
 				>
 					<option value="">Gender</option>
@@ -93,7 +93,7 @@ const VillagerIndex: NextPage = (props) => {
 				<select
 					aria-label="Select Species"
 					value={species || ''}
-					className="inline-block p-2 m-4"
+					className="inline-block p-2 m-4 rounded"
 					onChange={(event) => setSpecies(event.target.value || '')}
 				>
 					<option value="">Species</option>
@@ -106,7 +106,7 @@ const VillagerIndex: NextPage = (props) => {
 				<select
 					aria-label="Select Star Sign"
 					value={starSign || ''}
-					className="inline-block p-2 m-4"
+					className="inline-block p-2 m-4 rounded"
 					onChange={(event) => setStarSign(event.target.value || '')}
 				>
 					<option value="">Star Sign</option>
@@ -119,7 +119,7 @@ const VillagerIndex: NextPage = (props) => {
 				<select
 					aria-label="Select Personality"
 					value={personality || ''}
-					className="inline-block p-2 m-4"
+					className="inline-block p-2 m-4 rounded"
 					onChange={(event) => setPersonality(event.target.value || '')}
 				>
 					<option value="">Personality</option>
@@ -130,7 +130,7 @@ const VillagerIndex: NextPage = (props) => {
 					))}
 				</select>
 				<button
-					className="inline-block bg-green-900 text-gray-100 p-2 px-3 rounded-lg m-4"
+					className="inline-block bg-green-900 text-gray-100 p-2 px-3 rounded m-4"
 					onClick={() => {
 						setGender(undefined);
 						setPersonality(undefined);

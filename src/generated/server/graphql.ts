@@ -175,7 +175,6 @@ export type Villager = Node & {
 	__typename?: 'Villager';
 	id: Scalars['ID'];
 	name: Scalars['String'];
-	frName: Scalars['String'];
 	gender: Gender;
 	picture?: Maybe<Picture>;
 	nookiPediaPage: Scalars['String'];
@@ -188,6 +187,7 @@ export type Villager = Node & {
 	islandProbability: Scalars['Float'];
 	campsiteProbability: Scalars['Float'];
 	getsAlong: Array<Maybe<Villager>>;
+	translations: VillagerNameTranslations;
 };
 
 export type VillagerIslandProbabilityArgs = {
@@ -196,6 +196,21 @@ export type VillagerIslandProbabilityArgs = {
 
 export type VillagerCampsiteProbabilityArgs = {
 	villageState?: Maybe<VillageStateInput>;
+};
+
+export type VillagerNameTranslations = {
+	__typename?: 'VillagerNameTranslations';
+	japanese?: Maybe<Scalars['String']>;
+	japaneseExplanation?: Maybe<Scalars['String']>;
+	spanish?: Maybe<Scalars['String']>;
+	french?: Maybe<Scalars['String']>;
+	german?: Maybe<Scalars['String']>;
+	italian?: Maybe<Scalars['String']>;
+	dutch?: Maybe<Scalars['String']>;
+	korean?: Maybe<Scalars['String']>;
+	koreanExplanation?: Maybe<Scalars['String']>;
+	russian?: Maybe<Scalars['String']>;
+	chinese?: Maybe<Scalars['String']>;
 };
 
 export type VillagerSearchInput = {
@@ -309,6 +324,7 @@ export type ResolversTypes = ResolversObject<{
 	StarSign: ResolverTypeWrapper<DeepPartial<StarSign>>;
 	VillageStateInput: ResolverTypeWrapper<DeepPartial<VillageStateInput>>;
 	Float: ResolverTypeWrapper<DeepPartial<Scalars['Float']>>;
+	VillagerNameTranslations: ResolverTypeWrapper<DeepPartial<VillagerNameTranslations>>;
 	Int: ResolverTypeWrapper<DeepPartial<Scalars['Int']>>;
 	VillagerSearchInput: ResolverTypeWrapper<DeepPartial<VillagerSearchInput>>;
 	VillagersResultConnection: ResolverTypeWrapper<DeepPartial<VillagersResultConnection>>;
@@ -334,6 +350,7 @@ export type ResolversParentTypes = ResolversObject<{
 	StarSign: DeepPartial<StarSign>;
 	VillageStateInput: DeepPartial<VillageStateInput>;
 	Float: DeepPartial<Scalars['Float']>;
+	VillagerNameTranslations: DeepPartial<VillagerNameTranslations>;
 	Int: DeepPartial<Scalars['Int']>;
 	VillagerSearchInput: DeepPartial<VillagerSearchInput>;
 	VillagersResultConnection: DeepPartial<VillagersResultConnection>;
@@ -440,7 +457,6 @@ export type VillagerResolvers<
 > = ResolversObject<{
 	id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 	name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-	frName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 	gender?: Resolver<ResolversTypes['Gender'], ParentType, ContextType>;
 	picture?: Resolver<Maybe<ResolversTypes['Picture']>, ParentType, ContextType>;
 	nookiPediaPage?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -463,6 +479,25 @@ export type VillagerResolvers<
 		RequireFields<VillagerCampsiteProbabilityArgs, never>
 	>;
 	getsAlong?: Resolver<Array<Maybe<ResolversTypes['Villager']>>, ParentType, ContextType>;
+	translations?: Resolver<ResolversTypes['VillagerNameTranslations'], ParentType, ContextType>;
+	__isTypeOf?: isTypeOfResolverFn<ParentType>;
+}>;
+
+export type VillagerNameTranslationsResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['VillagerNameTranslations'] = ResolversParentTypes['VillagerNameTranslations']
+> = ResolversObject<{
+	japanese?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	japaneseExplanation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	spanish?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	french?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	german?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	italian?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	dutch?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	korean?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	koreanExplanation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	russian?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	chinese?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 	__isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
@@ -491,6 +526,7 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	Picture?: PictureResolvers<ContextType>;
 	Query?: QueryResolvers<ContextType>;
 	Villager?: VillagerResolvers<ContextType>;
+	VillagerNameTranslations?: VillagerNameTranslationsResolvers<ContextType>;
 	VillagersResultConnection?: VillagersResultConnectionResolvers<ContextType>;
 	VillagersResultEdge?: VillagersResultEdgeResolvers<ContextType>;
 }>;

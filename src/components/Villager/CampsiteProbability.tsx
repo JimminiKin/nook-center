@@ -37,7 +37,7 @@ const CampsiteProbability: React.FC<{
 	return (
 		<span className="tooltip">
 			<span className="whitespace-no-wrap">
-				<span className="mr-1">⛺</span>
+				<span className="mr-1 text-lg">⛺</span>
 				<span className="text-sm">{(data.villager.campsiteProbability * 100).toFixed(2)}%</span>
 			</span>
 			<span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">

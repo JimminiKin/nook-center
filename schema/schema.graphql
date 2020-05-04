@@ -1,183 +1,193 @@
 type Query {
-  villager(villagerId: ID!): Villager
-  villagers(
-    start: Int = 20
-    after: String = null
-    search: VillagerSearchInput = null
-  ): VillagersResultConnection!
-  island(islandId: ID!): Island
-  islands(search: IslandSearchInput!): [Island!]!
+	villager(villagerId: ID!): Villager
+	villagers(start: Int = 20, after: String = null, search: VillagerSearchInput = null): VillagersResultConnection!
+	island(islandId: ID!): Island
+	islands(search: IslandSearchInput!): [Island!]!
 }
 
 interface Node {
-  id: ID!
+	id: ID!
 }
 
 type PageInfo {
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-  endCursor: String
-  count: Int!
+	hasNextPage: Boolean!
+	hasPreviousPage: Boolean!
+	startCursor: String
+	endCursor: String
+	count: Int!
 }
 
 input VillageStateInput {
-  currentVillagers: [ID!]!
-  pastVillagers: [ID!]!
-  pastCampers: [ID!]!
+	currentVillagers: [ID!]!
+	pastVillagers: [ID!]!
+	pastCampers: [ID!]!
 }
 
 type VillagersResultConnection {
-  edges: [VillagersResultEdge!]!
-  pageInfo: PageInfo!
+	edges: [VillagersResultEdge!]!
+	pageInfo: PageInfo!
 }
 
 type VillagersResultEdge {
-  cursor: String!
-  node: Villager!
+	cursor: String!
+	node: Villager!
 }
 
 input VillagerSearchInput {
-  text: String
-  personality: Personality
-  species: Species
-  gender: Gender
-  starSign: StarSign
+	text: String
+	personality: Personality
+	species: Species
+	gender: Gender
+	starSign: StarSign
 }
 
 input IslandSearchInput {
-  treesBadSpecial: Boolean
-  treesGoodSpecial: Boolean
-  flowersBadSpecial: Boolean
-  flowersGoodSpecial: Boolean
-  rocksBadSpecial: Boolean
-  rocksGoodSpecial: Boolean
-  insectsBadSpecial: Boolean
-  insectsGoodSpecial: Boolean
-  fishesBadSpecial: Boolean
-  fishesGoodSpecial: Boolean
+	treesBadSpecial: Boolean
+	treesGoodSpecial: Boolean
+	flowersBadSpecial: Boolean
+	flowersGoodSpecial: Boolean
+	rocksBadSpecial: Boolean
+	rocksGoodSpecial: Boolean
+	insectsBadSpecial: Boolean
+	insectsGoodSpecial: Boolean
+	fishesBadSpecial: Boolean
+	fishesGoodSpecial: Boolean
 }
 
 type Picture {
-  thumb: String!
-  medium: String!
-  full: String!
+	thumb: String!
+	medium: String!
+	full: String!
+}
+
+type VillagerNameTranslations {
+	japanese: String
+	japaneseExplanation: String
+	spanish: String
+	french: String
+	german: String
+	italian: String
+	dutch: String
+	korean: String
+	koreanExplanation: String
+	russian: String
+	chinese: String
 }
 
 type Villager implements Node {
-  id: ID!
-  name: String!
-  frName: String!
-  gender: Gender!
-  picture: Picture
-  nookiPediaPage: String!
-  species: Species!
-  personality: Personality!
-  starSign: StarSign!
-  birthday: String!
-  description: String!
-  saying: String!
-  islandProbability(villageState: VillageStateInput): Float!
-  campsiteProbability(villageState: VillageStateInput): Float!
-  getsAlong: [Villager]!
+	id: ID!
+	name: String!
+	gender: Gender!
+	picture: Picture
+	nookiPediaPage: String!
+	species: Species!
+	personality: Personality!
+	starSign: StarSign!
+	birthday: String!
+	description: String!
+	saying: String!
+	islandProbability(villageState: VillageStateInput): Float!
+	campsiteProbability(villageState: VillageStateInput): Float!
+	getsAlong: [Villager]!
+	translations: VillagerNameTranslations!
 }
 
 type Island {
-  id: ID!
-  name: String!
-  picture: String!
-  maxOneDailyVisit: Boolean!
-  probability: Float!
-  requirements: String
-  description: String!
-  trees: String!
-  treesBadSpecial: Boolean!
-  treesGoodSpecial: Boolean!
-  flowers: String!
-  flowersBadSpecial: Boolean!
-  flowersGoodSpecial: Boolean!
-  rocks: String!
-  rocksBadSpecial: Boolean!
-  rocksGoodSpecial: Boolean!
-  insects: String!
-  insectsBadSpecial: Boolean!
-  insectsGoodSpecial: Boolean!
-  fishes: String!
-  fishesBadSpecial: Boolean!
-  fishesGoodSpecial: Boolean!
+	id: ID!
+	name: String!
+	picture: String!
+	maxOneDailyVisit: Boolean!
+	probability: Float!
+	requirements: String
+	description: String!
+	trees: String!
+	treesBadSpecial: Boolean!
+	treesGoodSpecial: Boolean!
+	flowers: String!
+	flowersBadSpecial: Boolean!
+	flowersGoodSpecial: Boolean!
+	rocks: String!
+	rocksBadSpecial: Boolean!
+	rocksGoodSpecial: Boolean!
+	insects: String!
+	insectsBadSpecial: Boolean!
+	insectsGoodSpecial: Boolean!
+	fishes: String!
+	fishesBadSpecial: Boolean!
+	fishesGoodSpecial: Boolean!
 }
 
 enum RelationshipQuality {
-  LIKE
-  NEUTRAL
-  DISLIKE
+	LIKE
+	NEUTRAL
+	DISLIKE
 }
 
 enum Personality {
-  CRANKY
-  JOCK
-  LAZY
-  NORMAL
-  PEPPY
-  SISTERLY
-  SMUG
-  SNOOTY
+	CRANKY
+	JOCK
+	LAZY
+	NORMAL
+	PEPPY
+	SISTERLY
+	SMUG
+	SNOOTY
 }
 
 enum Species {
-  ALLIGATOR
-  ANTEATER
-  BEAR
-  BIRD
-  BULL
-  CAT
-  CHICKEN
-  COW
-  CUB
-  DEER
-  DOG
-  DUCK
-  EAGLE
-  ELEPHANT
-  FROG
-  GOAT
-  GORILLA
-  HAMSTER
-  HIPPO
-  KANGAROO
-  KOALA
-  LION
-  MONKEY
-  MOUSE
-  OCTOPUS
-  OSTRICH
-  PENGUIN
-  RABBIT
-  RHINO
-  SHEEP
-  PIG
-  SQUIRREL
-  WOLF
-  HORSE
-  TIGER
+	ALLIGATOR
+	ANTEATER
+	BEAR
+	BIRD
+	BULL
+	CAT
+	CHICKEN
+	COW
+	CUB
+	DEER
+	DOG
+	DUCK
+	EAGLE
+	ELEPHANT
+	FROG
+	GOAT
+	GORILLA
+	HAMSTER
+	HIPPO
+	KANGAROO
+	KOALA
+	LION
+	MONKEY
+	MOUSE
+	OCTOPUS
+	OSTRICH
+	PENGUIN
+	RABBIT
+	RHINO
+	SHEEP
+	PIG
+	SQUIRREL
+	WOLF
+	HORSE
+	TIGER
 }
 
 enum Gender {
-  MALE
-  FEMALE
+	MALE
+	FEMALE
 }
 
 enum StarSign {
-  AQUARIUS
-  PISCES
-  ARIES
-  TAURUS
-  GEMINI
-  CANCER
-  VIRGO
-  LIBRA
-  SCORPIO
-  SAGITTARIUS
-  CAPRICORN
-  LEO
+	AQUARIUS
+	PISCES
+	ARIES
+	TAURUS
+	GEMINI
+	CANCER
+	VIRGO
+	LIBRA
+	SCORPIO
+	SAGITTARIUS
+	CAPRICORN
+	LEO
 }

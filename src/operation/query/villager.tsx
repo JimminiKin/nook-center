@@ -14,15 +14,31 @@ export type VillagerQuery = {__typename: 'Query'} & {
 			Types.Villager,
 			| 'id'
 			| 'name'
-			| 'frName'
 			| 'gender'
+			| 'birthday'
 			| 'nookiPediaPage'
 			| 'species'
 			| 'personality'
 			| 'starSign'
 			| 'description'
 			| 'saying'
-		>
+		> & {
+				picture?: Types.Maybe<{__typename: 'Picture'} & Pick<Types.Picture, 'medium' | 'full'>>;
+				translations: {__typename: 'VillagerNameTranslations'} & Pick<
+					Types.VillagerNameTranslations,
+					| 'japanese'
+					| 'japaneseExplanation'
+					| 'spanish'
+					| 'french'
+					| 'german'
+					| 'italian'
+					| 'dutch'
+					| 'korean'
+					| 'koreanExplanation'
+					| 'russian'
+					| 'chinese'
+				>;
+			}
 	>;
 };
 
@@ -31,8 +47,25 @@ export const VillagerDocument = gql`
 		villager(villagerId: $villagerId) {
 			id
 			name
-			frName
 			gender
+			picture {
+				medium
+				full
+			}
+			translations {
+				japanese
+				japaneseExplanation
+				spanish
+				french
+				german
+				italian
+				dutch
+				korean
+				koreanExplanation
+				russian
+				chinese
+			}
+			birthday
 			nookiPediaPage
 			species
 			personality

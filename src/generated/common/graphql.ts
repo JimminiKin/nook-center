@@ -172,7 +172,6 @@ export type Villager = Node & {
 	__typename?: 'Villager';
 	id: Scalars['ID'];
 	name: Scalars['String'];
-	frName: Scalars['String'];
 	gender: Gender;
 	picture?: Maybe<Picture>;
 	nookiPediaPage: Scalars['String'];
@@ -185,6 +184,7 @@ export type Villager = Node & {
 	islandProbability: Scalars['Float'];
 	campsiteProbability: Scalars['Float'];
 	getsAlong: Array<Maybe<Villager>>;
+	translations: VillagerNameTranslations;
 };
 
 export type VillagerIslandProbabilityArgs = {
@@ -193,6 +193,21 @@ export type VillagerIslandProbabilityArgs = {
 
 export type VillagerCampsiteProbabilityArgs = {
 	villageState?: Maybe<VillageStateInput>;
+};
+
+export type VillagerNameTranslations = {
+	__typename?: 'VillagerNameTranslations';
+	japanese?: Maybe<Scalars['String']>;
+	japaneseExplanation?: Maybe<Scalars['String']>;
+	spanish?: Maybe<Scalars['String']>;
+	french?: Maybe<Scalars['String']>;
+	german?: Maybe<Scalars['String']>;
+	italian?: Maybe<Scalars['String']>;
+	dutch?: Maybe<Scalars['String']>;
+	korean?: Maybe<Scalars['String']>;
+	koreanExplanation?: Maybe<Scalars['String']>;
+	russian?: Maybe<Scalars['String']>;
+	chinese?: Maybe<Scalars['String']>;
 };
 
 export type VillagerSearchInput = {

@@ -5,6 +5,7 @@ import {useCampsiteProbabilityQuery} from '@query/campsiteProbability';
 import {CurrentInhabitantsContext} from '@components/contexts/CurrentInhabitantsContext';
 import {PastInhabitantsContext} from '@components/contexts/PastInhabitantsContext';
 import {PastCampersContext} from '@components/contexts/PastCampersContext';
+import useLocalStorage from '@components/hooks/useLocalStorage';
 
 const VillagerStateToggles: React.FC<{
 	villagerId: string;
@@ -14,12 +15,6 @@ const VillagerStateToggles: React.FC<{
 	);
 	const {pastInhabitants, addPastInhabitant, removePastInhabitant} = React.useContext(PastInhabitantsContext);
 	const {pastCampers, addPastCamper, removePastCamper} = React.useContext(PastCampersContext);
-
-	let villageState: VillageStateInput = {
-		currentVillagers: currentInhabitants,
-		pastVillagers: pastInhabitants,
-		pastCampers,
-	};
 
 	const isPastCamper = pastCampers.includes(villagerId);
 	const isPastInhabitant = pastInhabitants.includes(villagerId);

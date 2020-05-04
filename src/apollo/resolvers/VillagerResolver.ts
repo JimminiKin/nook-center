@@ -88,10 +88,6 @@ const VillagerResolver: Resolvers<any> = {
 			return getOne(parent.id).name;
 		},
 
-		frName(parent) {
-			return getOne(parent.id).translations.french;
-		},
-
 		gender(parent) {
 			const gender = getGender(getOne(parent.id).gender);
 			if (gender === null) {
@@ -130,6 +126,10 @@ const VillagerResolver: Resolvers<any> = {
 
 		description(parent) {
 			return getOne(parent.id).description;
+		},
+
+		translations(parent) {
+			return getOne(parent.id).translations;
 		},
 
 		birthday(parent) {

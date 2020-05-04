@@ -20,14 +20,17 @@ const Hunting: NextPage = (props) => {
 					Two main methods can be used to hunt villager, wether you're time traveling or not :
 				</p>
 				<ul className="p-4 py-2 mx-8 -my-2 text-xl list-disc">
-					<li>Mystery island method : slow, no probability manipulation possible, need to get those miles tickets</li>
-					<li>Campsite method : still slow, but probability can be much more manipulated, making it much easier</li>
+					<li>Mystery Island method : slow, no probability manipulation possible, need to get those miles tickets</li>
+					<li>
+						Campsite Rolling method : still slow, but probability can be much more manipulated, making it much easier
+					</li>
 				</ul>
 				<p className="p-4 text-xl">
 					Obviously time traveling will help but percentages presented by this website should still hold true if you're
-					not a filthy cheater. In my example, using the campsite method, I was able to get Julian after 35 campsites,
-					which means at least 35 weeks, in game time. With time traveling, this means at least 100 time jumps, so more
-					or less 20 hours. Without TT, this means at least .... 35 real life weeks ! Your mileage may vary.
+					not a filthy cheater. In my example, using the campsite rolling method, I was able to get Julian after 35
+					campsites, which means at least 35 weeks, in game time. With time traveling, this means at least 100 time
+					jumps, so more or less 20 hours. Without TT, this means at least .... 35 real life weeks ! Your mileage may
+					vary.
 				</p>
 				<section>
 					<h2 className="text-green-900 font-bold text-4xl p-8 bg-green-500 text-center rounded-lg my-4">
@@ -67,7 +70,7 @@ const Hunting: NextPage = (props) => {
 				</section>
 				<section>
 					<h2 className="text-green-900 font-bold text-4xl p-8 bg-green-500 text-center rounded-lg my-4">
-						Campsite Method
+						Campsite Rolling Method
 					</h2>
 					<p className="p-4 text-xl">
 						Probability of a specific villager spawning in a campsite is driven mainly by the personality of the

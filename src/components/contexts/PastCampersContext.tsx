@@ -8,16 +8,20 @@ export interface PastCampersContextType {
 	pastCampers: Scalars['ID'][];
 	addPastCamper: (pastCamperId: Scalars['ID']) => void;
 	removePastCamper: (pastCamperId: Scalars['ID']) => void;
+	emptyPastCamperList: () => void;
+	resetPastCamperListToDefault: () => void;
 }
 
 export const PastCampersContext = React.createContext<PastCampersContextType>({
 	pastCampers: [],
 	addPastCamper: (pastCamperId) => {},
 	removePastCamper: (pastCamperId) => {},
+	emptyPastCamperList: () => {},
+	resetPastCamperListToDefault: () => {},
 });
 
 const PastCampersProvider: React.FC = (props) => {
-	const [pastCampers, setPastCampers] = useLocalStorage('pastCampers', [
+	const [pastCampers, setPastCampers, deletePastCampers] = useLocalStorage('pastCampers', [
 		'Tank',
 		'Olaf',
 		'Frank',
@@ -63,8 +67,17 @@ const PastCampersProvider: React.FC = (props) => {
 		setPastCampers(pastCampers.filter((a) => a !== villagerId));
 	};
 
+	const emptyPastCamperList: PastCampersContextType['emptyPastCamperList'] = () => {
+		setPastCampers([]);
+	};
+	const resetPastCamperListToDefault: PastCampersContextType['resetPastCamperListToDefault'] = () => {
+		deletePastCampers();
+	};
+
 	return (
-		<PastCampersContext.Provider value={{pastCampers, addPastCamper, removePastCamper}}>
+		<PastCampersContext.Provider
+			value={{pastCampers, addPastCamper, removePastCamper, emptyPastCamperList, resetPastCamperListToDefault}}
+		>
 			{props.children}
 		</PastCampersContext.Provider>
 	);

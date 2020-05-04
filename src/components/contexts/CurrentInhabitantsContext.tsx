@@ -9,16 +9,20 @@ export interface CurrentInhabitantsContextType {
 	currentInhabitants: Scalars['ID'][];
 	addCurrentInhabitant: (currentInhabitantId: Scalars['ID']) => void;
 	removeCurrentInhabitant: (currentInhabitantId: Scalars['ID']) => void;
+	emptyCurrentInhabitantList: () => void;
+	resetCurrentInhabitantListToDefault: () => void;
 }
 
 export const CurrentInhabitantsContext = React.createContext<CurrentInhabitantsContextType>({
 	currentInhabitants: [],
 	addCurrentInhabitant: (currentInhabitantId) => {},
 	removeCurrentInhabitant: (currentInhabitantId) => {},
+	emptyCurrentInhabitantList: () => {},
+	resetCurrentInhabitantListToDefault: () => {},
 });
 
 const InhabitantsProvider: React.FC = (props) => {
-	const [currentInhabitants, setInhabitants] = useLocalStorage('currentInhabitants', [
+	const [currentInhabitants, setInhabitants, deleteInhabitants] = useLocalStorage('currentInhabitants', [
 		'Filbert',
 		'Octavian',
 		'Phoebe',
@@ -39,12 +43,22 @@ const InhabitantsProvider: React.FC = (props) => {
 		setInhabitants(currentInhabitants.filter((a) => a !== villagerId));
 	};
 
+	const emptyCurrentInhabitantList: CurrentInhabitantsContextType['emptyCurrentInhabitantList'] = () => {
+		setInhabitants([]);
+	};
+
+	const resetCurrentInhabitantListToDefault: CurrentInhabitantsContextType['resetCurrentInhabitantListToDefault'] = () => {
+		deleteInhabitants();
+	};
+
 	return (
 		<CurrentInhabitantsContext.Provider
 			value={{
 				currentInhabitants,
 				addCurrentInhabitant,
 				removeCurrentInhabitant,
+				emptyCurrentInhabitantList,
+				resetCurrentInhabitantListToDefault,
 			}}
 		>
 			{props.children}
