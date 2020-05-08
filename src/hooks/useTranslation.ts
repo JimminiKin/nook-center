@@ -8,7 +8,7 @@ export default function useTranslation() {
 
 	function t(key: string) {
 		if (!strings[locale][key]) {
-			console.warn(`Translation '${key}' for locale '${locale}' not found.`);
+			// console.warn(`Translation '${key}' for locale '${locale}' not found.`);
 		}
 		return strings[locale][key] || strings[defaultLocale][key] || '';
 	}
