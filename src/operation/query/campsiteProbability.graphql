@@ -1,6 +1,0 @@
-query campsiteProbability($villagerId: ID!, $villageState: VillageStateInput) {
-	villager(villagerId: $villagerId) {
-		id
-		campsiteProbability(villageState: $villageState)
-	}
-}

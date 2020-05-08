@@ -1,41 +1,16 @@
 import React from 'react';
-import Head from 'next/head';
-import dynamic from 'next/dynamic';
-import {NextPage} from 'next';
 import Link from 'next/link';
-import InfiniteScroller from 'react-infinite-scroller';
-
-import {withApollo} from '@apollo/client';
-
-import {ucfirst} from '@modules/utils';
 
 import VillagerCard from '@components/Villager/VillagerCard';
-import {useVillagerCardQuery, VillagerCardQuery} from '@query/villagerCard';
 
-import {CurrentInhabitantsContext} from '@components/contexts/CurrentInhabitantsContext';
-import {PastInhabitantsContext} from '@components/contexts/PastInhabitantsContext';
-import {PastCampersContext} from '@components/contexts/PastCampersContext';
-import useLocalStorage from '@components/hooks/useLocalStorage';
+import {CurrentInhabitantsContext} from '@contexts/CurrentInhabitantsContext';
+import {PastInhabitantsContext} from '@contexts/PastInhabitantsContext';
+import {PastCampersContext} from '@contexts/PastCampersContext';
+import {FullVillager} from '@src/types';
 
-const LoadedVillagerCard: React.FC<{villagerId: string}> = ({villagerId}) => {
-	const {loading, error, data} = useVillagerCardQuery({
-		variables: {
-			villagerId,
-		},
-	});
-
-	if (error) {
-		throw error;
-	}
-
-	if (loading) {
-		return <li>Loading</li>;
-	}
-
-	return <VillagerCard villager={data.villager}></VillagerCard>;
-};
-
-const MyVillagers: React.FC = () => {
+const MyVillagers: React.FC<{
+	villagers: {[key: string]: FullVillager};
+}> = ({villagers}) => {
 	const {currentInhabitants, emptyCurrentInhabitantList, resetCurrentInhabitantListToDefault} = React.useContext(
 		CurrentInhabitantsContext,
 	);
@@ -46,39 +21,35 @@ const MyVillagers: React.FC = () => {
 
 	return (
 		<div className="p-4">
-			<div className="flex justify-around p-4">
-				<div>
-					<button
-						className="inline-block bg-green-900 text-gray-100 p-2 px-3 rounded"
-						onClick={() => {
-							emptyCurrentInhabitantList();
-							emptyPastInhabitantList();
-							emptyPastCamperList();
-						}}
-					>
-						Remove Current Data
-					</button>
-				</div>
-				<div>
-					<button
-						className="inline-block bg-green-900 text-gray-100 p-2 px-3 rounded"
-						onClick={() => {
-							resetCurrentInhabitantListToDefault();
-							resetPastInhabitantListToDefault();
-							resetPastCamperListToDefault();
-						}}
-					>
-						Restore Demo Data
-					</button>
-				</div>
+			<div className="flex flex-wrap justify-evenly">
+				<button
+					className="block bg-green-900 text-gray-100 p-2 px-3 m-4 rounded"
+					onClick={() => {
+						emptyCurrentInhabitantList();
+						emptyPastInhabitantList();
+						emptyPastCamperList();
+					}}
+				>
+					Remove Current Data
+				</button>
+				<button
+					className="block bg-green-900 text-gray-100 p-2 px-3 m-4 rounded"
+					onClick={() => {
+						resetCurrentInhabitantListToDefault();
+						resetPastInhabitantListToDefault();
+						resetPastCamperListToDefault();
+					}}
+				>
+					Restore Demo Data
+				</button>
 			</div>
 			<h2 className="text-green-900 font-bold text-4xl p-8 bg-green-500 text-center rounded-lg my-6">
 				Current Inhabitants
 			</h2>
 			{currentInhabitants.length ? (
-				<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+				<ul className="flex flex-wrap justify-evenly p-4">
 					{currentInhabitants.map((inhabitantId) => (
-						<LoadedVillagerCard key={inhabitantId} villagerId={inhabitantId} />
+						<VillagerCard key={inhabitantId} villager={villagers[inhabitantId]} villagers={villagers} />
 					))}
 				</ul>
 			) : (
@@ -96,9 +67,9 @@ const MyVillagers: React.FC = () => {
 			</h2>
 
 			{currentInhabitants.length ? (
-				<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+				<ul className="flex flex-wrap justify-evenly p-4">
 					{pastInhabitants.map((pastInhabitantId) => (
-						<LoadedVillagerCard key={pastInhabitantId} villagerId={pastInhabitantId} />
+						<VillagerCard key={pastInhabitantId} villager={villagers[pastInhabitantId]} villagers={villagers} />
 					))}
 				</ul>
 			) : (
@@ -115,9 +86,9 @@ const MyVillagers: React.FC = () => {
 			<h2 className="text-green-900 font-bold text-4xl p-8 bg-green-500 text-center rounded-lg my-6">Past Campers</h2>
 
 			{currentInhabitants.length ? (
-				<ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+				<ul className="flex flex-wrap justify-evenly p-4">
 					{pastCampers.map((pastCamperId) => (
-						<LoadedVillagerCard key={pastCamperId} villagerId={pastCamperId} />
+						<VillagerCard key={pastCamperId} villager={villagers[pastCamperId]} villagers={villagers} />
 					))}
 				</ul>
 			) : (

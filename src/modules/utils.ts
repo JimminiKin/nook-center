@@ -1,4 +1,4 @@
-import {Gender, StarSign} from '@gen/common/graphql';
+import {Gender, ZodiacSign} from '@src/types';
 
 export const ucfirst = (value: string): string => {
 	return value.charAt(0).toUpperCase() + value.toLowerCase().slice(1);
@@ -15,31 +15,31 @@ export const getGenderEmoji = (gender: Gender) => {
 	}
 };
 
-export const getZodiacEmoji = (zodiac: StarSign) => {
+export const getZodiacEmoji = (zodiac: ZodiacSign) => {
 	switch (zodiac) {
-		case StarSign.Aquarius:
+		case ZodiacSign.Aquarius:
 			return '♒';
-		case StarSign.Aries:
+		case ZodiacSign.Aries:
 			return '♈';
-		case StarSign.Cancer:
+		case ZodiacSign.Cancer:
 			return '♋';
-		case StarSign.Capricorn:
+		case ZodiacSign.Capricorn:
 			return '♑';
-		case StarSign.Gemini:
+		case ZodiacSign.Gemini:
 			return '♊';
-		case StarSign.Leo:
+		case ZodiacSign.Leo:
 			return '♌';
-		case StarSign.Libra:
+		case ZodiacSign.Libra:
 			return '♎';
-		case StarSign.Pisces:
+		case ZodiacSign.Pisces:
 			return '♓';
-		case StarSign.Sagittarius:
+		case ZodiacSign.Sagittarius:
 			return '♐';
-		case StarSign.Scorpio:
+		case ZodiacSign.Scorpio:
 			return '♏';
-		case StarSign.Taurus:
+		case ZodiacSign.Taurus:
 			return '♉';
-		case StarSign.Virgo:
+		case ZodiacSign.Virgo:
 			return '♍';
 		default:
 			return '🤷';

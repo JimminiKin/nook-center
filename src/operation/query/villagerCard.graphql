@@ -1,6 +1,0 @@
-query villagerCard($villagerId: ID!) {
-	villager(villagerId: $villagerId) {
-		id
-		...VillagerCard
-	}
-}

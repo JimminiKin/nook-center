@@ -1,43 +1,47 @@
 import React from 'react';
-import {VillageStateInput} from '@gen/common/graphql';
-import {useIslandProbabilityQuery} from '@query/islandProbability';
 
-import {CurrentInhabitantsContext} from '@components/contexts/CurrentInhabitantsContext';
+import {CurrentInhabitantsContext} from '@contexts/CurrentInhabitantsContext';
+import {Species, FullVillager} from '@src/types';
+import useTranslation from '@hooks/useTranslation';
+
+const nTotalSpecies = Object.keys(Species).length;
 
 const CampsiteProbability: React.FC<{
 	villagerId: string;
-}> = ({villagerId}) => {
+	villagers: {[key: string]: FullVillager};
+}> = ({villagerId, villagers}) => {
 	const {currentInhabitants} = React.useContext(CurrentInhabitantsContext);
+	const {t} = useTranslation();
 
-	let villageState: VillageStateInput = {
-		currentVillagers: currentInhabitants,
-		pastVillagers: [],
-		pastCampers: [],
-	};
+	const ratio = React.useMemo(() => {
+		if (currentInhabitants.includes(villagerId)) {
+			return 0;
+		}
 
-	const {loading, error, data} = useIslandProbabilityQuery({
-		variables: {
-			villagerId,
-			villageState,
-		},
-	});
+		const allVillagers = Object.values(villagers);
+		let sameSpeciesCount = 0;
 
-	if (error) {
-		throw error;
-	}
+		for (let i = 0; i < allVillagers.length; i++) {
+			const villager = allVillagers[i];
+			if (currentInhabitants.includes(villager.id)) {
+				continue;
+			}
+			if (villagers[villager.id].species === villagers[villagerId].species) {
+				sameSpeciesCount++;
+			}
+		}
 
-	if (loading) {
-		return <span>...</span>;
-	}
+		return (((1 / nTotalSpecies) * 1) / sameSpeciesCount) * 100;
+	}, [villagerId, currentInhabitants]);
 
 	return (
 		<span className="tooltip">
 			<span className="whitespace-no-wrap">
-				<span className="mr-1 text-lg">🏝</span>
-				<span className="text-sm">{(data.villager.islandProbability * 100).toFixed(2)}%</span>
+				<span className="mr-1 text-xl">🏝</span>
+				{ratio.toFixed(2)}%
 			</span>
 			<span className="tooltip-text bg-green-200 rounded -ml-8 -mt-6">
-				<span>Probability of spawn in on random island</span>
+				{t('Probability of spawn in on random island')}
 			</span>
 		</span>
 	);

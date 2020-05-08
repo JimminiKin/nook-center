@@ -1,11 +1,9 @@
 import React from 'react';
-import {VillageStateInput} from '@gen/common/graphql';
-import {useCampsiteProbabilityQuery} from '@query/campsiteProbability';
 
-import {CurrentInhabitantsContext} from '@components/contexts/CurrentInhabitantsContext';
-import {PastInhabitantsContext} from '@components/contexts/PastInhabitantsContext';
-import {PastCampersContext} from '@components/contexts/PastCampersContext';
-import useLocalStorage from '@components/hooks/useLocalStorage';
+import {CurrentInhabitantsContext} from '@contexts/CurrentInhabitantsContext';
+import {PastInhabitantsContext} from '@contexts/PastInhabitantsContext';
+import {PastCampersContext} from '@contexts/PastCampersContext';
+import useTranslation from '@hooks/useTranslation';
 
 const VillagerStateToggles: React.FC<{
 	villagerId: string;
@@ -15,6 +13,7 @@ const VillagerStateToggles: React.FC<{
 	);
 	const {pastInhabitants, addPastInhabitant, removePastInhabitant} = React.useContext(PastInhabitantsContext);
 	const {pastCampers, addPastCamper, removePastCamper} = React.useContext(PastCampersContext);
+	const {t} = useTranslation();
 
 	const isPastCamper = pastCampers.includes(villagerId);
 	const isPastInhabitant = pastInhabitants.includes(villagerId);
@@ -34,7 +33,7 @@ const VillagerStateToggles: React.FC<{
 						<span className="mr-1">⛺ ➖</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
-						<span>Unmark as past campsite visitors</span>
+						<span>{t('Unmark as past campsite visitors')}</span>
 					</span>
 				</div>
 			) : (
@@ -49,7 +48,7 @@ const VillagerStateToggles: React.FC<{
 						<span className="mr-1">⛺ ➕</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
-						<span>Mark as past campsite visitors</span>
+						<span>{t('Mark as past campsite visitors')}</span>
 					</span>
 				</div>
 			)}
@@ -65,7 +64,7 @@ const VillagerStateToggles: React.FC<{
 						<span className="mr-1">📦 ➖</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8  mt-8">
-						<span>Unmark as past island inhabitant</span>
+						<span>{t('Unmark as past island inhabitant')}</span>
 					</span>
 				</div>
 			) : (
@@ -80,7 +79,7 @@ const VillagerStateToggles: React.FC<{
 						<span className="mr-1">📦 ➕</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8  mt-8">
-						<span>Mark as past island inhabitant</span>
+						<span>{t('Mark as past island inhabitant')}</span>
 					</span>
 				</div>
 			)}
@@ -96,7 +95,7 @@ const VillagerStateToggles: React.FC<{
 						<span className="mr-1">🏠 ➖</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
-						<span>Unmark as current island inhabitant</span>
+						<span>{t('Unmark as current island inhabitant')}</span>
 					</span>
 				</div>
 			) : (
@@ -111,7 +110,7 @@ const VillagerStateToggles: React.FC<{
 						<span className="mr-1">🏠 ➕</span>
 					</button>
 					<span className="tooltip-text bg-green-200 rounded -ml-8 mt-8">
-						<span>Mark as current island inhabitant</span>
+						<span>{t('Mark as current island inhabitant')}</span>
 					</span>
 				</div>
 			)}

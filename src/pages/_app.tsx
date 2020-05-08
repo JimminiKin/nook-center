@@ -2,13 +2,10 @@ import React, {useState} from 'react';
 import {AppProps} from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
-import Header from '@components/App/Header';
 
 import withGA from 'next-ga';
 
-import CurrentInhabitantsProvider from '@components/contexts/CurrentInhabitantsContext';
-import PastInhabitantsProdiver from '@components/contexts/PastInhabitantsContext';
-import PastCampersProvider from '@components/contexts/PastCampersContext';
+import withLocale from '@hocs/withLocale';
 
 import '../css/styles.css';
 
@@ -18,16 +15,7 @@ const App: React.FC<AppProps> = ({Component, pageProps}) => {
 			<Head>
 				<title>Nook Center</title>
 			</Head>
-			<Header />
-			<main>
-				<PastCampersProvider>
-					<PastInhabitantsProdiver>
-						<CurrentInhabitantsProvider>
-							<Component {...pageProps} />
-						</CurrentInhabitantsProvider>
-					</PastInhabitantsProdiver>
-				</PastCampersProvider>
-			</main>
+			<Component {...pageProps} />
 		</>
 	);
 };

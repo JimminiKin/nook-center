@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
 	render() {
 		return (
-			<Html lang="en">
+			<Html lang={`${this.props.__NEXT_DATA__.query.lang}`}>
 				<Head>
 					<link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png" />
 					<link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png" />

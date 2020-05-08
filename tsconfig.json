@@ -19,9 +19,13 @@
 			"@modules/*": ["src/modules/*"],
 			"@apollo/*": ["src/apollo/*"],
 			"@data/*": ["data/*"],
+			"@contexts/*": ["src/contexts/*"],
+			"@hocs/*": ["src/hocs/*"],
+			"@hooks/*": ["src/hooks/*"],
 			"@components/*": ["src/components/*"],
 			"@gen/*": ["src/generated/*"],
 			"@query/*": ["src/operation/query/*"],
+			"@src/*": ["src/*"],
 			"@fragment/*": ["src/operation/fragment/*"]
 		}
 	},

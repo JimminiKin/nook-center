@@ -2,9 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import HeaderLink from './HeaderLink';
 import {FaBars, FaHamburger} from 'react-icons/fa';
+import useTranslation from '@hooks/useTranslation';
+import LocaleSwitcher from './LocaleSwitcher';
 
 const Header: React.FC = () => {
 	const [isMenuOpen, setOpenMenu] = React.useState<boolean>(false);
+	const {t, locale} = useTranslation();
 
 	const closeMenu = () => {
 		setOpenMenu(false);
@@ -13,12 +16,13 @@ const Header: React.FC = () => {
 	return (
 		<header className="bg-green-700 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
 			<div className="flex justify-between items-center px-4 py-3 sm:p-0">
-				<div>
-					<Link href="/">
+				<div className="flex justify-start">
+					<Link href="/[lang]" as={`/${locale}`}>
 						<a onClick={closeMenu}>
 							<img className="h-10" src="/icons/favicon-96x96.png" alt="Logo" />
 						</a>
 					</Link>
+					<LocaleSwitcher />
 				</div>
 				<div>
 					<button
@@ -34,9 +38,9 @@ const Header: React.FC = () => {
 				</div>
 			</div>
 			<nav className={`px-2 pt-2 pb-4 sm:flex sm:p-0 ${isMenuOpen ? 'block' : 'hidden'}`}>
-				<HeaderLink target="/villagers" name="Villagers" onClick={closeMenu} />
-				<HeaderLink target="/my-village" name="My Village" onClick={closeMenu} />
-				<HeaderLink target="/hunting" name="Hunting" onClick={closeMenu} />
+				<HeaderLink target="/villagers" name={t('VillagersMenuEntry')} onClick={closeMenu} />
+				<HeaderLink target="/my-village" name={t('MyVillageMenuEntry')} onClick={closeMenu} />
+				<HeaderLink target="/hunting" name={t('HuntingMenuEntry')} onClick={closeMenu} />
 			</nav>
 		</header>
 	);
