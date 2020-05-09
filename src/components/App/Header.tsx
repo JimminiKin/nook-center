@@ -41,6 +41,7 @@ const Header: React.FC = () => {
 				<HeaderLink target="/villagers" name={t('VillagersMenuEntry')} onClick={closeMenu} />
 				<HeaderLink target="/my-village" name={t('MyVillageMenuEntry')} onClick={closeMenu} />
 				<HeaderLink target="/hunting" name={t('HuntingMenuEntry')} onClick={closeMenu} />
+				<HeaderLink target="/about" name={t('AboutMenuEntry')} onClick={closeMenu} />
 			</nav>
 		</header>
 	);

@@ -5,6 +5,7 @@ const strings: Strings = {
 		VillagersMenuEntry: 'Villagers',
 		MyVillageMenuEntry: 'My Village',
 		HuntingMenuEntry: 'Hunting',
+		AboutMenuEntry: 'About',
 
 		Reset: 'Reset',
 		'Text Search': 'Text Search',
@@ -91,6 +92,7 @@ const strings: Strings = {
 		VillagersMenuEntry: 'Villageois',
 		MyVillageMenuEntry: 'Mon Village',
 		HuntingMenuEntry: 'Chasse',
+		AboutMenuEntry: 'À Propos',
 
 		Reset: 'Réinitialiser',
 		'Text Search': 'Recherche Textuelle',
