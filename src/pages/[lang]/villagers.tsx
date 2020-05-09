@@ -27,8 +27,8 @@ export const getStaticProps = async ({params}) => {
 };
 const Villagers: React.FC<{villagers: {[key: string]: FullVillager}}> = ({villagers}) => {
 	const [gender, setGender] = React.useState<string>('');
-	const [personality, setPersonality] = React.useState<string>('');
-	const [species, setSpecies] = React.useState<string>('');
+	const [personality, setPersonality] = React.useState<string>(Personality.Smug);
+	const [species, setSpecies] = React.useState<string>(Species.Cat);
 	const [starSign, setStarSign] = React.useState<string>('');
 	const [searchText, setSearchText] = React.useState<string>('');
 

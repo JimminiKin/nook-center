@@ -158,10 +158,10 @@ const strings: Strings = {
 		Cranky: 'Grincheux',
 		Jock: 'Sportif',
 		Lazy: 'Paresseux',
-		Normal: 'Normal',
+		Normal: 'Normale',
 		Peppy: 'Énergique',
-		Smug: 'Chich',
-		Snooty: 'Arrogant',
+		Smug: 'Chic',
+		Snooty: 'Arrogante',
 
 		'Probability of spawn in campsite': 'Probabilité dapparition au camping',
 		'Probability of spawn in on random island': 'Probabilité dapparition sur une île mystère',

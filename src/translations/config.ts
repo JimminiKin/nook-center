@@ -56,7 +56,7 @@ export const languageEmojis: Record<typeof locales[number], string> = {
 	'en-gb': '🇬🇧',
 	'en-us': '🇺🇸',
 	es: '🇪🇸',
-	'es-us': 'es 🇺🇸',
+	'es-us': '🇺🇸',
 	fr: '🇫🇷',
 	'fr-ca': '🇨🇦',
 	// it: '🇮🇹',
