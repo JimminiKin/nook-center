@@ -2,7 +2,7 @@ import {Strings} from './types';
 
 const strings: Strings = {
 	'en-us': {
-		VillagersMenuEntry: 'Villagerdds',
+		VillagersMenuEntry: 'Villagers',
 		MyVillageMenuEntry: 'My Village',
 		HuntingMenuEntry: 'Hunting',
 
