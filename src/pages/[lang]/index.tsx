@@ -3,6 +3,7 @@ import Layout from '@components/App/Layout';
 import withLocale from '@hocs/withLocale';
 import Link from 'next/link';
 import {locales} from '../../translations/config';
+import useTranslation from '@hooks/useTranslation';
 
 export const getStaticPaths = () => {
 	return {
@@ -20,6 +21,7 @@ export const getStaticProps = ({params}) => {
 };
 
 const IndexPage: React.FC = () => {
+	const {locale} = useTranslation();
 	return (
 		<Layout>
 			<div className="p-10">
@@ -29,7 +31,7 @@ const IndexPage: React.FC = () => {
 				</p>
 				<p className="p-4 text-xl">
 					Details on the methods can be found in the{' '}
-					<Link href="/hunting">
+					<Link href="/[lang]/hunting" as={`/${locale}/hunting`}>
 						<a className="font-bold">hunting</a>
 					</Link>{' '}
 					page

@@ -7,10 +7,12 @@ import {CurrentInhabitantsContext} from '@contexts/CurrentInhabitantsContext';
 import {PastInhabitantsContext} from '@contexts/PastInhabitantsContext';
 import {PastCampersContext} from '@contexts/PastCampersContext';
 import {FullVillager} from '@src/types';
+import useTranslation from '@hooks/useTranslation';
 
 const MyVillagers: React.FC<{
 	villagers: {[key: string]: FullVillager};
 }> = ({villagers}) => {
+	const {locale} = useTranslation();
 	const {currentInhabitants, emptyCurrentInhabitantList, resetCurrentInhabitantListToDefault} = React.useContext(
 		CurrentInhabitantsContext,
 	);
@@ -55,7 +57,7 @@ const MyVillagers: React.FC<{
 			) : (
 				<p className="p-4 text-xl">
 					You have no recorded current villager. To add some,{' '}
-					<Link href="/villagers">
+					<Link href="/[lang]/villagers" as={`/${locale}/villagers`}>
 						<a className="font-bold">search for your villagers</a>
 					</Link>{' '}
 					and click on the <span className="whitespace-no-wrap bg-green-600 p-1 rounded">🏠 ➕</span> icon in the
@@ -75,7 +77,7 @@ const MyVillagers: React.FC<{
 			) : (
 				<p className="p-4 text-xl">
 					You have no recorded past villager. To add some,{' '}
-					<Link href="/villagers">
+					<Link href="/[lang]/villagers" as={`/${locale}/villagers`}>
 						<a className="font-bold">search for your past villagers</a>
 					</Link>{' '}
 					and click on the <span className="whitespace-no-wrap bg-green-600 p-1 rounded">🏠 ➕</span> icon in the
@@ -94,7 +96,7 @@ const MyVillagers: React.FC<{
 			) : (
 				<p className="p-4 text-xl">
 					You have no recorded campsite visitors. To add some,{' '}
-					<Link href="/villagers">
+					<Link href="/[lang]/villagers" as={`/${locale}/villagers`}>
 						<a className="font-bold">search for your past campers</a>
 					</Link>{' '}
 					and click on the <span className="whitespace-no-wrap bg-green-600 p-1 rounded">🏠 ➕</span> icon in the
