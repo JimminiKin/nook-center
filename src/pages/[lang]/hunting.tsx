@@ -127,9 +127,59 @@ const Hunting: React.FC = () => {
 					</p>
 					<p className="p-4 text-xl">Now that we talked about the probability, we can get into the method itself.</p>
 
-					<p className="p-4 text-xl">// TODO More info =).</p>
 					<p className="p-4 text-xl">
-						For more information about the specifics of the method{' '}
+						To improve your chances, try to kick out of you villager all the villager with the same personality as your
+						targeted villager. To learn how to kick out villagers, you can watch{' '}
+						<a href="https://www.youtube.com/watch?v=AasUEUGerZA" target="_blank" rel="noopener" className="font-bold">
+							this video
+						</a>{' '}
+						from{' '}
+						<a
+							href="https://www.youtube.com/channel/UCXbYdeldt9XqrXBB1kl00Mg"
+							target="_blank"
+							rel="noopener"
+							className="font-bold"
+						>
+							TagBackTV
+						</a>
+						.
+					</p>
+					<p className="p-4 text-xl">Once that's done :</p>
+
+					<div className="px-12 py-4">
+						<ul className="list-decimal text-xl">
+							<li>Open the game</li>
+							<li>If Isabelle announces a campsite, go to step 4</li>
+							<li>
+								If not, finish the annoucement until you spawn in front of your house, quit the game (no need to save),
+								TT one day in the future, go back to step 2
+							</li>
+							<li>
+								If the camper is not the villager you want, TT 6 days in the future, this will raise you chance of a
+								camper spawning to 20%, the maxium, go back to step 2
+							</li>
+							<li>
+								If it is the villager you want, talk to the camper until he offers to join the island. You might have to
+								play card games, this may be long ..
+							</li>
+							<li>
+								Once he tells you he can't join the island because it's full BE CAREFUL, after going through the
+								discussion, the camper will end up announcing who he can replace. STOP HERE AND THINK ABOUT IT.
+							</li>
+							<li>
+								If the villager that's targeted for being kicked out is the NOT the one you want to be replace,
+								IMMEDIATLY quit the game, DO NOT go thourgh the discussion, restart the game and go to step 5
+							</li>
+							<li>
+								If it is, congratulation, you've got your target in your village. TT to the day after twice in a row, to
+								finalize the new villager installation in the village, otherwise you might get into weird issues with
+								the house of the new villager being the one of the previous villager.
+							</li>
+							<li>Pick a new target and got to step 1 ;)</li>
+						</ul>
+					</div>
+					<p className="p-4 text-xl">
+						For more information about the specifics of the method, watch{' '}
 						<a href="https://www.youtube.com/watch?v=b_Veo5QayUI" target="_blank" rel="noopener" className="font-bold">
 							this video
 						</a>{' '}
